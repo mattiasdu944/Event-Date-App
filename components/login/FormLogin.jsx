@@ -130,7 +130,6 @@ export const FormLogin = ({signIn}) => {
             />
           </Flex>
           <Button
-            type="submit"
             alignItems="center"
             gap={3}
             color="black"
