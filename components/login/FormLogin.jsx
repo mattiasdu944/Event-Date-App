@@ -10,7 +10,7 @@ import { ImFacebook2 } from "react-icons/im";
 import styled from "styled-components";
 import Link from "next/link";
 
-export const FormLogin = () => {
+export const FormLogin = ({signIn}) => {
 
   const toast = useToast();
   const Toast = ( title, description, status ) => {
@@ -24,7 +24,7 @@ export const FormLogin = () => {
         duration: 3000,
         
     })
-}
+  }
 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -138,6 +138,7 @@ export const FormLogin = () => {
             _hover={{ backgroundColor: "white.500" }}
             _active={{ backgroundColor: "orange.500", color: "white.200" }}
             value="Continuar con Google"
+            onClick={signIn}
           >
             <FcGoogle />
             Continuar con Google
@@ -162,7 +163,6 @@ export const FormLogin = () => {
     </>
   );
 };
-
 const Form = styled.form`
   display: flex;
   flex-direction: column;

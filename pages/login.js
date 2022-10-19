@@ -1,8 +1,8 @@
-import { FormSignUp } from "../components/signup"
-
-import { Container, Text } from "@chakra-ui/react"
-import styled from "styled-components"
+import { signIn, getSession } from "next-auth/react"
 import { FormLogin } from "../components/login"
+import { Container, Text } from "@chakra-ui/react"
+
+import styled from "styled-components"
 import Head from "next/head"
 
 const Login = () => {
@@ -25,7 +25,9 @@ const Login = () => {
                 >
                   Event Date
               </Text>
-              <FormLogin/>
+              <FormLogin
+                signIn={signIn}
+              />
               
             </FormContainer>
           </Container>
@@ -53,4 +55,21 @@ const FormContainer = styled.div`
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0 , .2)
 `
 
-export default Login
+export const getServerSideProps = async (ctx) => {
+    const session = await getSession(ctx);
+    if(session.user){
+      return{
+        redirect:{
+          destination: '/profile/'
+        }
+      }
+    }
+    return{
+      props:{
+        session
+      }
+    }
+}
+
+
+export default Login;
