@@ -8,6 +8,7 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import styled from "styled-components"
+import Link from "next/link";
 
 export const FormSignUp = () => {
 
@@ -150,7 +151,9 @@ export const FormSignUp = () => {
                         _active={{ backgroundColor: 'transparent' }}
                         
                     >
-                        Ya tienes una cuenta? Inicia Sesion
+                        <Link href='/login'>
+                            Ya tienes una cuenta? Inicia Sesion
+                        </Link>
                     </Button>
                     <Flex alignItems='center'>
                         <Divider
