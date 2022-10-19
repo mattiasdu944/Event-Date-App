@@ -74,12 +74,24 @@ export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
   const providers = await getProviders();
 
+  if(session){
+    return{
+      props: {
+        providers
+      },
+      redirect:{
+        destination:'/'
+      }
+
+    }
+  }
+
   return {
     props: {
-      providers,
       session,
-    },
-  };
+      providers
+    }
+  }
 }
 
 export default SignIn;
