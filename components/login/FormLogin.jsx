@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 
 import styled from "styled-components";
+import Link from "next/link";
 
 export const FormLogin = () => {
 
@@ -109,7 +110,9 @@ export const FormLogin = () => {
             _hover={{ backgroundColor: "transparent" }}
             _active={{ backgroundColor: "transparent" }}
           >
-            Ya tienes una cuenta? Inicia Sesion
+            <Link href='/sign-up'>
+              No tienes una cuenta? Registrate
+            </Link>
           </Button>
           <Flex alignItems="center">
             <Divider
