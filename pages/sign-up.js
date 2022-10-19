@@ -3,7 +3,11 @@ import { FormSignUp } from "../components/signup"
 import { Container, Text } from "@chakra-ui/react"
 import styled from "styled-components"
 
+
+
 const SignUp = () => {
+  
+
   return (
     <Section>
         <Container maxW='container.lg'>

@@ -1,17 +1,63 @@
 import { useState } from "react"
 
-import { Button, ButtonGroup, Divider, Flex, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react"
+import { Button, ButtonGroup, Divider, 
+Flex, FormControl, FormLabel, Input, InputGroup, 
+InputRightElement, Text, useToast } from "@chakra-ui/react"
+
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import styled from "styled-components"
 
 export const FormSignUp = () => {
+
+
+    const Toast = ( title, description, status ) => {
+        toast({
+            title,
+            description,
+            status: "error",
+            position: 'top-right',
+            status,
+            isClosable: true,
+            duration: 3000,
+            
+        })
+    }
+
+    const toast = useToast()
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
+
+
+    const [sigUp, setSigUp] = useState({
+        name: "",
+        lastname: "",
+        email: "",
+        password: "",
+    })
+
+    const handleSubmit = e =>{
+        e.preventDefault();
+        console.log(e)
+
+        if(sigUp.name.trim() === '' || sigUp.email.trim() === '' || sigUp.lastname.trim() === '' || sigUp.password.trim() === ''){
+            Toast('Datos Erroneos', 'Datos ingresados de manera incorrecta', 'error');
+            return;
+        }
+
+        if(sigUp.password.trim().length < 8){
+            Toast('Contraseña debil', 'Ingrese minimo 8 caracteres', 'error');
+            return
+        }
+        
+        Toast('Registrado con exito', 'Revise su correo electronico', 'success');
+
+    }
+
     return (
         <>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <FormControl mb={3}>
                     <FormLabel>Nombre</FormLabel>
                     <Input
@@ -21,6 +67,8 @@ export const FormSignUp = () => {
                         borderColor='whiteAlpha.300'
                         focusBorderColor="orange.500"
                         _hover={{ focusBorderColor: 'orange.200' }}
+                        value={sigUp.name}
+                        onChange={e => setSigUp({...sigUp, name: e.target.value})}
                     />
                 </FormControl>
 
@@ -34,6 +82,8 @@ export const FormSignUp = () => {
                         borderColor='whiteAlpha.300'
                         focusBorderColor="orange.500"
                         _hover={{ focusBorderColor: 'orange.200' }}
+                        value={sigUp.lastname}
+                        onChange={e => setSigUp({...sigUp, lastname: e.target.value})}
                     />
                 </FormControl>
 
@@ -47,6 +97,8 @@ export const FormSignUp = () => {
                         borderColor='whiteAlpha.300'
                         focusBorderColor="orange.500"
                         _hover={{ focusBorderColor: 'orange.200' }}
+                        value={sigUp.email}
+                        onChange={e => setSigUp({...sigUp, email: e.target.value})}
                     />
                 </FormControl>
 
@@ -61,6 +113,8 @@ export const FormSignUp = () => {
                             borderColor='whiteAlpha.300'
                             focusBorderColor="orange.500"
                             _hover={{ outline: 'orange.200' }}
+                            value={sigUp.password}
+                            onChange={e => setSigUp({...sigUp, password: e.target.value})}
                         />
                         <InputRightElement width='4.5rem'>
                             <Button
@@ -94,6 +148,7 @@ export const FormSignUp = () => {
                         backgroundColor='transparent'
                         _hover={{ backgroundColor: 'transparent' }}
                         _active={{ backgroundColor: 'transparent' }}
+                        
                     >
                         Ya tienes una cuenta? Inicia Sesion
                     </Button>
@@ -114,13 +169,13 @@ export const FormSignUp = () => {
                     </Flex>
                     <Button
                         type="submit"
-
                         alignItems='center'
                         gap={3}
                         color='black'
                         backgroundColor='white.500'
                         _hover={{ backgroundColor: 'white.500' }}
                         _active={{ backgroundColor: 'orange.500', color: 'white.200' }}
+                        value='Continuar con Google'
                     >
                         <FcGoogle/>
                         Continuar con Google
