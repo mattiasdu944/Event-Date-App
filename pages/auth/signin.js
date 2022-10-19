@@ -1,11 +1,14 @@
+import { useState } from "react";
+import Head from "next/head";
 import { signIn, getSession, getProviders } from "next-auth/react";
+import { FormSignUp } from "../../components/signup/FormSignUp";
 import { FormLogin } from "../../components/login";
 import { Container, Text } from "@chakra-ui/react";
 
 import styled from "styled-components";
-import Head from "next/head";
 
 const SignIn = ({ providers }) => {
+  const [register, setRegister] = useState(true);
   return (
     <>
       <Head>
@@ -27,7 +30,20 @@ const SignIn = ({ providers }) => {
             >
               Event Date
             </Text>
-            <FormLogin signIn={() => signIn(providers.google.id)} />
+            {
+                register 
+                ? <FormLogin 
+                    signIn={signIn} 
+                    providers={providers}
+                    setRegister={setRegister}
+                />
+                : <FormSignUp 
+                    signIn={signIn} 
+                    providers={providers} 
+                    setRegister={setRegister}
+
+                /> 
+            }
           </FormContainer>
         </Container>
       </Section>
@@ -58,19 +74,10 @@ export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
   const providers = await getProviders();
 
-  if (session.user) {
-    return {
-      redirect: {
-        destination: "/profile/",
-      },
-    };
-  }
-
-  console.log(session)
   return {
-    props: { 
-        providers,
-        session
+    props: {
+      providers,
+      session,
     },
   };
 }

@@ -1,17 +1,12 @@
 import { useState } from "react";
 
-import { Button, ButtonGroup, Divider, Flex, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text, useToast,
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { 
+  Button, ButtonGroup, Divider, Flex, FormControl, FormLabel, Input, 
+  InputGroup, InputRightElement, Text, useToast,
 } from "@chakra-ui/react";
 
-import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
-import { ImFacebook2 } from "react-icons/im";
-
-import styled from "styled-components";
-import Link from "next/link";
-
-export const FormLogin = ({signIn}) => {
-
+export const FormLogin = ({signIn, providers, setRegister}) => {
   const toast = useToast();
   const Toast = ( title, description, status ) => {
     toast({
@@ -51,7 +46,7 @@ export const FormLogin = ({signIn}) => {
   };
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
 
         <FormControl mb={3}>
           <FormLabel>Correo Electronico</FormLabel>
@@ -109,10 +104,9 @@ export const FormLogin = ({signIn}) => {
             backgroundColor="transparent"
             _hover={{ backgroundColor: "transparent" }}
             _active={{ backgroundColor: "transparent" }}
+            onClick={() => setRegister(false)}
           >
-            <Link href='/sign-up'>
               No tienes una cuenta? Registrate
-            </Link>
           </Button>
           <Flex alignItems="center">
             <Divider
@@ -129,40 +123,24 @@ export const FormLogin = ({signIn}) => {
               borderColor="whiteAlpha.100"
             />
           </Flex>
-          <Button
-            alignItems="center"
-            gap={3}
-            color="black"
-            backgroundColor="white.500"
-            _hover={{ backgroundColor: "white.500" }}
-            _active={{ backgroundColor: "orange.500", color: "white.200" }}
-            value="Continuar con Google"
-            onClick={signIn}
-          >
-            <FcGoogle />
-            Continuar con Google
-          </Button>
-
-          <Button
-            type="submit"
-            alignItems="center"
-            gap={3}
-            color="black"
-            backgroundColor="white.500"
-            _hover={{ backgroundColor: "white.500" }}
-            _active={{ backgroundColor: "orange.500", color: "white.200" }}
-          >
-            <Text color="facebook.400">
-              <ImFacebook2 />
-            </Text>
-            Continuar con Facebook
-          </Button>
+          {
+            Object.values(providers).map(provider => (
+                <Button
+                gap={3}
+                key={provider.id}
+                color="black"
+                alignItems="center"
+                backgroundColor="white.500"
+                _hover={{ backgroundColor: "white.500" }}
+                _active={{ backgroundColor: "orange.500", color: "white.200" }}
+                onClick={() => signIn(provider.id)}
+              >
+              {`Iniciar con ${provider.name}`}
+            </Button>
+            ))
+          }
         </ButtonGroup>
-      </Form>
+      </form>
     </>
   );
 };
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
