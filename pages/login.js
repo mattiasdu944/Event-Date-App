@@ -3,27 +3,34 @@ import { FormSignUp } from "../components/signup"
 import { Container, Text } from "@chakra-ui/react"
 import styled from "styled-components"
 import { FormLogin } from "../components/login"
+import Head from "next/head"
 
 const Login = () => {
   return (
-    <Section>
-        <Container maxW='container.lg'>
-          <FormContainer>
+    <>
+      <Head>
+        <meta name="description" content="Event Date - Iniciar sesion en la plataforma y comienza a disfrutar" />
+        <title>Event Date | Login</title>
+      </Head>
+      <Section>
+          <Container maxW='container.lg'>
+            <FormContainer>
 
-            <Text
-              bgGradient='linear(to-r, #fc382e, #FF0080)'
-              bgClip='text'
-              fontSize='6xl'
-              fontWeight='extrabold'
-              textAlign='center'
-              >
-                Event Date
-            </Text>
-            <FormLogin/>
-            
-          </FormContainer>
-        </Container>
-    </Section>
+              <Text
+                bgGradient='linear(to-r, #fc382e, #FF0080)'
+                bgClip='text'
+                fontSize='6xl'
+                fontWeight='extrabold'
+                textAlign='center'
+                >
+                  Event Date
+              </Text>
+              <FormLogin/>
+              
+            </FormContainer>
+          </Container>
+      </Section>
+    </>
   )
 }
 const Section = styled.section`

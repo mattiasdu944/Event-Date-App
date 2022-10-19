@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { FormSignUp } from "../components/signup"
 
 import { Container, Text } from "@chakra-ui/react"
@@ -9,24 +10,30 @@ const SignUp = () => {
   
 
   return (
-    <Section>
-        <Container maxW='container.lg'>
-          <FormContainer>
+    <>
+      <Head>
+        <meta name="description" content="Event Date - Registrate en la plataforma y comienza a disfrutar" />
+        <title>Event Date | Sign Up</title>
+      </Head>
+      <Section>
+          <Container maxW='container.lg'>
+            <FormContainer>
 
-            <Text
-              bgGradient='linear(to-r, #fc382e, #FF0080)'
-              bgClip='text'
-              fontSize='6xl'
-              fontWeight='extrabold'
-              textAlign='center'
-              >
-                Event Date
-            </Text>
-            <FormSignUp/>
-            
-          </FormContainer>
-        </Container>
-    </Section>
+              <Text
+                bgGradient='linear(to-r, #fc382e, #FF0080)'
+                bgClip='text'
+                fontSize='6xl'
+                fontWeight='extrabold'
+                textAlign='center'
+                >
+                  Event Date
+              </Text>
+              <FormSignUp/>
+              
+            </FormContainer>
+          </Container>
+      </Section>
+    </>
   )
 }
 
