@@ -8,10 +8,18 @@ export const theme = extendTheme({
     orange: {
       200:'#FE6148',
       500:'#FC382E',
-
+    },
+    white:{
+      200:'#fefefe',
+      500:'#F0F2F7',
     }
+  
 
   },
+  fonts: {
+    body: 'Gilroy, sans-serif',
+  },
+
   styles: {
     global: {
       // styles for the `body`

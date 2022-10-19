@@ -1,15 +1,17 @@
 import { useState } from "react"
 
-import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement } from "@chakra-ui/react"
+import { Button, ButtonGroup, Divider, Flex, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react"
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
+import { ImFacebook2 } from "react-icons/im";
 import styled from "styled-components"
 
 export const FormSignUp = () => {
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
     return (
-        <Section>
-            <form>
+        <>
+            <Form>
                 <FormControl mb={3}>
                     <FormLabel>Nombre</FormLabel>
                     <Input
@@ -74,10 +76,79 @@ export const FormSignUp = () => {
                         </InputRightElement>
                     </FormControl>
                 </InputGroup>
-            </form>
-        </Section>
+
+                <ButtonGroup
+                    display='grid'
+                    gap={3}
+                >
+                    
+                    <Button
+                        backgroundColor='orange.500'
+                        type="submit"
+                        _hover={{ backgroundColor: 'orange.200' }}
+                        _active={{ backgroundColor: 'orange.500' }}
+                    >
+                        Registrarse
+                    </Button>
+                    <Button
+                        backgroundColor='transparent'
+                        _hover={{ backgroundColor: 'transparent' }}
+                        _active={{ backgroundColor: 'transparent' }}
+                    >
+                        Ya tienes una cuenta? Inicia Sesion
+                    </Button>
+                    <Flex alignItems='center'>
+                        <Divider
+                            m={0}
+                            orientation='horizontal'
+                            backgroundColor='whiteAlpha.300'
+                            borderColor='whiteAlpha.100'
+                        />
+                        <Text color='whiteAlpha.300'> o </Text>
+                        <Divider 
+                            m={0}
+                            orientation='horizontal'
+                            backgroundColor='whiteAlpha.300'
+                            borderColor='whiteAlpha.100'
+                        />
+                    </Flex>
+                    <Button
+                        type="submit"
+
+                        alignItems='center'
+                        gap={3}
+                        color='black'
+                        backgroundColor='white.500'
+                        _hover={{ backgroundColor: 'white.500' }}
+                        _active={{ backgroundColor: 'orange.500', color: 'white.200' }}
+                    >
+                        <FcGoogle/>
+                        Continuar con Google
+                    </Button>
+
+                    <Button
+                        type="submit"
+                        alignItems='center'
+                        gap={3}
+                        color='black'
+                        backgroundColor='white.500'
+                        _hover={{ backgroundColor: 'white.500' }}
+                        _active={{ backgroundColor: 'orange.500', color: 'white.200' }}
+                        
+                    >
+                        <Text color='facebook.400'>
+                            <ImFacebook2/>
+                        </Text>
+                        Continuar con Facebook
+                    </Button>
+                </ButtonGroup>
+            </Form>
+        </>
     )
 }
 
-const Section = styled.section`
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    
 `
