@@ -6,7 +6,6 @@ import { dbUsers } from "../../../database"
 
 export default NextAuth({
     providers: [
-        
         Credentials({
             name:'Custom Login',
             credentials:{
@@ -14,23 +13,7 @@ export default NextAuth({
                 password: {label:'Contraseña', type:'password', placeholder:'Ingresa una contraseña'},
             },
             async authorize(credentials){
-                // console.log({credentials});
-                // const obj={
-                //     name:'Mattias',
-                //     email:'correo@gmail.com',
-                // }
-                // if( !credentials.email ){
-                //     return null;
-                // }
-                // if( credentials.password != '12'  ){
-                //     return null;
-                // }
-
-                return await dbUsers.checkEmailPassword( credentials.email, credentials.password );
-                // console.log(credentials.email, credentials.password);
-                // dbUsers.checkEmailPassword( credentials.email, credentials.password)
-                // return null
-                 
+                return await dbUsers.checkEmailPassword( credentials.email, credentials.password ); 
             }
         }),
         GoogleProvider({
@@ -38,7 +21,6 @@ export default NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
     ],
-    secret: process.env.JWT_SECRET,
     pages:{
         // signIn: '/auth/signin',
     },
@@ -47,7 +29,13 @@ export default NextAuth({
             
             if( account ){
                 token.accessToken = account.access_token;
+
                 switch(  account.type ){
+
+                    case 'oauth':
+                        // token.user = await dbUsers.oAuthToDbUser( user.email , user.name );
+                        break;
+                
                     case 'credentials':
                         token.user = user;
                         break;
@@ -65,5 +53,7 @@ export default NextAuth({
             return session;
         }
     },
+    
+    secret: process.env.JWT_SECRET,
     
 })
