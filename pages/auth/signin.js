@@ -8,7 +8,9 @@ import { Container, Text } from "@chakra-ui/react";
 import styled from "styled-components";
 
 const SignIn = ({ providers }) => {
+
   const [register, setRegister] = useState(true);
+  
   return (
     <>
       <Head>
@@ -22,7 +24,7 @@ const SignIn = ({ providers }) => {
         <Container maxW="container.lg">
           <FormContainer>
             <Text
-              bgGradient="linear(to-r, #fc382e, #FF0080)"
+              bgGradient="linear(to-r, #fc382e, orange.200)"
               bgClip="text"
               fontSize="6xl"
               fontWeight="extrabold"
@@ -73,7 +75,6 @@ const FormContainer = styled.div`
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
   const providers = await getProviders();
-
   if(session){
     return{
       props: {
@@ -82,7 +83,6 @@ export async function getServerSideProps(ctx) {
       redirect:{
         destination:'/'
       }
-
     }
   }
 
