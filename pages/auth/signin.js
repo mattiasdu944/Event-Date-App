@@ -1,14 +1,14 @@
 import { useState } from "react";
+import { getSession } from "next-auth/react";
 import Head from "next/head";
-import { signIn, getSession, getProviders } from "next-auth/react";
 import { FormSignUp } from "../../components/signup/FormSignUp";
 import { FormLogin } from "../../components/login";
+
 import { Container, Text } from "@chakra-ui/react";
 
 import styled from "styled-components";
 
-const SignIn = ({ providers }) => {
-
+const SignIn = () => {
   const [register, setRegister] = useState(true);
   
   return (
@@ -35,13 +35,9 @@ const SignIn = ({ providers }) => {
             {
                 register 
                 ? <FormLogin 
-                    signIn={signIn} 
-                    providers={providers}
                     setRegister={setRegister}
                 />
                 : <FormSignUp 
-                    signIn={signIn} 
-                    providers={providers} 
                     setRegister={setRegister}
 
                 /> 
@@ -72,26 +68,22 @@ const FormContainer = styled.div`
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
 `;
 
-export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx);
-  const providers = await getProviders();
-  if(session){
-    return{
-      props: {
-        providers
-      },
-      redirect:{
-        destination:'/'
-      }
-    }
-  }
+export const getServerSideProps = async (context) => {
+     const session = await getSession(context)
+     if(session){
+        return{
+          redirect:{
+            destination:'/',
+            permanent: false,
+          }
+        }
+     }
 
-  return {
-    props: {
-      session,
-      providers
-    }
-  }
+     return{
+          props:{
+              session
+          }
+     }
 }
 
-export default SignIn;
+export default SignIn

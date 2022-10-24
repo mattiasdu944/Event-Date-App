@@ -1,38 +1,33 @@
 import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import { 
-  Button, ButtonGroup, Divider, Flex, FormControl, FormLabel, Input, 
-  InputGroup, InputRightElement, Text, useToast,
-} from "@chakra-ui/react";
+import { Button, ButtonGroup, Divider, Flex, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text, useToast,} from "@chakra-ui/react";
 
-export const FormLogin = ({signIn, providers, setRegister}) => {
-  const toast = useToast();
-  const Toast = ( title, description, status ) => {
-    toast({
-        title,
-        description,
-        status: "error",
-        position: 'top-right',
-        status,
-        isClosable: true,
-        duration: 3000,
-        
-    })
-  }
-
+export const FormLogin = ({ setRegister }) => {
+  const { signInWithCredentials, signInWithGoogle } = useAuth();
+  
   const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
-  const [login, setlogin] = useState({
-    email: "",
-    password: "",
-  });
+  const [login, setlogin] = useState({email: "",password: ""});
+  
+  const toast = useToast();
+  const Toast = (title, description, status) => {
+    toast({
+      title,
+      description,
+      status: "error",
+      position: "top-right",
+      status,
+      isClosable: true,
+      duration: 3000,
+    });
+  };
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(login);
-
-    if ( login.email.trim() === "" || login.password.trim() === "") {
+    if (login.email.trim() === "" || login.password.trim() === "") {
       Toast("Datos Erroneos", "Datos ingresados de manera incorrecta", "error");
       return;
     }
@@ -42,12 +37,19 @@ export const FormLogin = ({signIn, providers, setRegister}) => {
       return;
     }
 
-    Toast("Registrado con exito", "Revise su correo electronico", "success");
+    try {
+      signInWithCredentials('',login.email, login.password,'login')
+      Toast("Registrado con exito", "ha iniciado sesion", "success");
+    } catch (error) {
+      console.log(error)
+    }
+    
+
+
   };
   return (
     <>
       <form onSubmit={handleSubmit}>
-
         <FormControl mb={3}>
           <FormLabel>Correo Electronico</FormLabel>
 
@@ -83,7 +85,7 @@ export const FormLogin = ({signIn, providers, setRegister}) => {
                 backgroundColor="transparent"
                 _hover={{ backgroundColor: "transparent" }}
                 _active={{ backgroundColor: "transparent" }}
-                onClick={handleClick}
+                onClick={() => setShow(!show)}
               >
                 {show ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
               </Button>
@@ -106,7 +108,7 @@ export const FormLogin = ({signIn, providers, setRegister}) => {
             _active={{ backgroundColor: "transparent" }}
             onClick={() => setRegister(false)}
           >
-              No tienes una cuenta? Registrate
+            No tienes una cuenta? Registrate
           </Button>
           <Flex alignItems="center">
             <Divider
@@ -123,22 +125,17 @@ export const FormLogin = ({signIn, providers, setRegister}) => {
               borderColor="whiteAlpha.100"
             />
           </Flex>
-          {
-            Object.values(providers).map(provider => (
-                <Button
-                gap={3}
-                key={provider.id}
-                color="black"
-                alignItems="center"
-                backgroundColor="white.500"
-                _hover={{ backgroundColor: "white.500" }}
-                _active={{ backgroundColor: "orange.500", color: "white.200" }}
-                onClick={() => signIn(provider.id)}
-              >
-              {`Iniciar con ${provider.name}`}
-            </Button>
-            ))
-          }
+          <Button
+            gap={3}
+            color="black"
+            alignItems="center"
+            backgroundColor="white.500"
+            _hover={{ backgroundColor: "white.500" }}
+            _active={{ backgroundColor: "orange.500", color: "white.200" }}
+            onClick={signInWithGoogle}
+          >
+            Iniciar con Google
+          </Button>
         </ButtonGroup>
       </form>
     </>

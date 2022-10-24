@@ -1,12 +1,11 @@
 import { useState } from "react"
-
-import { Button, ButtonGroup, Divider, 
-Flex, FormControl, FormLabel, Input, InputGroup, 
-InputRightElement, Text, useToast } from "@chakra-ui/react"
+import { useAuth } from "../../hooks/useAuth";
+import { Button, ButtonGroup, Divider, Flex, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text, useToast } from "@chakra-ui/react"
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
 
-export const FormSignUp = ({providers, setRegister, signIn}) => {
+export const FormSignUp = ({setRegister}) => {
+    const { signInWithCredentials, signInWithGoogle } = useAuth();
 
     const Toast = ( title, description, status ) => {
         toast({
@@ -23,8 +22,6 @@ export const FormSignUp = ({providers, setRegister, signIn}) => {
 
     const toast = useToast()
     const [show, setShow] = useState(false)
-    const handleClick = () => setShow(!show)
-
 
     const [sigUp, setSigUp] = useState({
         name: "",
@@ -46,8 +43,15 @@ export const FormSignUp = ({providers, setRegister, signIn}) => {
             Toast('Contraseña debil', 'Ingrese minimo 8 caracteres', 'error');
             return
         }
+
+        try {
+            signInWithCredentials(`${sigUp.name} ${sigUp.lastname}`, sigUp.email, sigUp.password, 'register')
+            Toast('Registrado con exito', 'Revise su correo electronico', 'success');
+            
+        } catch (error) {
+            console.log(error)
+        }
         
-        Toast('Registrado con exito', 'Revise su correo electronico', 'success');
 
     }
 
@@ -119,7 +123,7 @@ export const FormSignUp = ({providers, setRegister, signIn}) => {
                                 backgroundColor='transparent'
                                 _hover={{ backgroundColor: 'transparent' }}
                                 _active={{ backgroundColor: 'transparent' }}
-                                onClick={handleClick}
+                                onClick={() => setShow(!show)}
                             >
                                 {show ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                             </Button>
@@ -164,22 +168,17 @@ export const FormSignUp = ({providers, setRegister, signIn}) => {
                             borderColor='whiteAlpha.100'
                         />
                     </Flex>
-                    {
-                        Object.values(providers).map(provider => (
-                            <Button
-                            gap={3}
-                            key={provider.id}
-                            color="black"
-                            alignItems="center"
-                            backgroundColor="white.500"
-                            _hover={{ backgroundColor: "white.500" }}
-                            _active={{ backgroundColor: "orange.500", color: "white.200" }}
-                            onClick={() => signIn(provider.id)}
-                        >
-                        {`Registrate con ${provider.name}`}
-                        </Button>
-                        ))
-                    }
+                    <Button
+                        gap={3}
+                        color="black"
+                        alignItems="center"
+                        backgroundColor="white.500"
+                        _hover={{ backgroundColor: "white.500" }}
+                        _active={{ backgroundColor: "orange.500", color: "white.200" }}
+                        onClick={signInWithGoogle}
+                    >
+                        Iniciar con Google
+                    </Button>
                 </ButtonGroup>
             </form>
         </>

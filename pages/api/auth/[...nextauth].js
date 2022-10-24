@@ -9,11 +9,13 @@ export default NextAuth({
         Credentials({
             name:'Custom Login',
             credentials:{
+                name: {label:'Nombre:', type:'text', placeholder:'Ingresa tu Nombre'},
                 email: {label:'Email', type:'email', placeholder:'Ingresa tu correo'},
                 password: {label:'Contraseña', type:'password', placeholder:'Ingresa una contraseña'},
+                tipo: {label:'Tipo de credentials', type:'text', placeholder:''}
             },
             async authorize(credentials){
-                return await dbUsers.checkEmailPassword( credentials.email, credentials.password ); 
+                return await dbUsers.checkEmailPassword(credentials.name,credentials.email, credentials.password, credentials.tipo ); 
             }
         }),
         GoogleProvider({
@@ -21,9 +23,11 @@ export default NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
     ],
+    
     pages:{
-        // signIn: '/auth/signin',
+        signIn: '/auth/signin',
     },
+
     callbacks:{
         async jwt({token, account, user}){
             
@@ -33,7 +37,7 @@ export default NextAuth({
                 switch(  account.type ){
 
                     case 'oauth':
-                        // token.user = await dbUsers.oAuthToDbUser( user.email , user.name );
+                        token.user = await dbUsers.oAuthToDbUser( user.email , user.name );
                         break;
                 
                     case 'credentials':
@@ -55,5 +59,6 @@ export default NextAuth({
     },
     
     secret: process.env.JWT_SECRET,
+    
     
 })

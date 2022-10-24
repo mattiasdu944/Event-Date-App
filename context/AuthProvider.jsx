@@ -1,24 +1,27 @@
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { createContext, useEffect, useState } from 'react';
+import { createContext } from 'react';
+import { signIn, useSession } from 'next-auth/react';
+
 
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
-    const [iUser, setiUser] = useState()
-    const {data, status} = useSession();
-    const router = useRouter();
-    
-    useEffect(() => {
-      if(status === 'authenticated'){
-        console.log(data);
-      }
-    }, [status, data])
-    
-    
+      const {data}= useSession()
+      
+      // console.log(data)
 
+      const signInWithGoogle = () => {
+        signIn('google')
+
+      }
+      const signInWithCredentials = (name ,email, password , tipo) => {
+          signIn('credentials', { name, email, password, tipo });
+      } 
+    
     return(
-          <AuthContext.Provider value={{}}>
+          <AuthContext.Provider value={{
+            signInWithCredentials,
+            signInWithGoogle
+          }}>
                {children}
           </AuthContext.Provider>
      )
