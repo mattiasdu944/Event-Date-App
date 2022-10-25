@@ -1,4 +1,4 @@
-import { signOut } from "next-auth/react"
+import { getSession, signOut } from "next-auth/react"
 import { Layout } from '../components/ui/Layout'
 
 const HomePage = () => {
@@ -13,21 +13,16 @@ const HomePage = () => {
 
 export default HomePage
 
-// export async function getServerSideProps(context) {
-//   const session =  await getSession(context);
-//   if(!session){
-//     console.log('no hay session')
-//     return{
-//       props:{
-        
-//       },
-//       redirect:{
-//         destination:'/auth/signin'
-//       }
-//     }
-//   }
-//   console.log(session);
-//   return {
-//     props: {session}, // will be passed to the page component as props
-//   }
-// }
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx);
+  if( !session ){
+    return{
+      redirect:{
+        destination:'/auth/signin'
+      }
+    }
+  }
+  return {
+    props: {}, 
+  }
+}

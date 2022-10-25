@@ -1,14 +1,16 @@
 import { useRef } from 'react'
+import { useAuth } from '../../hooks';
 import { avatar_links } from '../../constants';
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Button, List, ListItem, Text, Grid, Flex, WrapItem, Avatar, Box} from '@chakra-ui/react'
+import { signOut } from 'next-auth/react';
 
 export const DrawerMenu = () => {
-    
-    
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
+    const { user } = useAuth()
+    
 
     return (
 
@@ -37,15 +39,15 @@ export const DrawerMenu = () => {
                     </DrawerHeader>
 
                     <DrawerBody>
-                        <Flex mb={5} gap={5} alignItems='center' justifyContent='center'>
-                            <WrapItem>
-                                <Avatar size='md' name='Kola Tioluwani' src='https://images.pexels.com/photos/2777898/pexels-photo-2777898.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' />
+                        <Grid mb={5} gap={5} alignItems='center'  justifyContent='center'>
+                            <WrapItem alignItems='center' justifyContent='center'>
+                                <Avatar size='md' name={user.name} src='https://bit.ly/broken-link' />
                             </WrapItem>
-                            <Box>
-                                <Text fontWeight={700}>Name Name2 Lastname Lastname2</Text>
-                                <Text>correo@example.com</Text>
+                            <Box textAlign='center'>
+                                <Text fontWeight={700}>{user.name}</Text>
+                                <Text>{user.email}</Text>
                             </Box>
-                        </Flex>
+                        </Grid>
                         <List>
                             <Grid gap={3}>
                                 {avatar_links.map(enlace =>
@@ -57,7 +59,7 @@ export const DrawerMenu = () => {
                             <ListItem mt={5}>
                                 <Flex gap={4}>
 
-                                    <Button color='orange.500' variant='link'>
+                                    <Button color='orange.500' variant='link' onClick={signOut}>
                                         Cerrar Sesion
                                     </Button>
                                 </Flex>

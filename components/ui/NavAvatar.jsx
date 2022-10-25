@@ -1,15 +1,20 @@
 import Link from 'next/link'
+import { useAuth } from "../../hooks";
 
 import { Avatar, Menu, MenuButton, MenuItem, MenuList, Portal, WrapItem } from '@chakra-ui/react'
 import { avatar_links } from '../../constants';
+import { signOut } from 'next-auth/react';
 
 
 export const NavAvatar = () => {
+    const { user } = useAuth();
+
+    console.log(user)
     return (
         <Menu>
-            <MenuButton>
+            <MenuButton bgColor='orange.500' borderRadius='full'>
                 <WrapItem>
-                    <Avatar size='sm' name='Mattias Dioluwani' src='https://images.pexels.com/photos/2777898/pexels-photo-2777898.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2' />
+                    <Avatar size='sm' name={user.name} src='https://bit.ly/broken-link' />
                 </WrapItem>
             </MenuButton>
             <Portal>
@@ -23,7 +28,7 @@ export const NavAvatar = () => {
                                 </MenuItem>
                             )
                         }
-                        <MenuItem color='orange.500' fontWeight={700}>
+                        <MenuItem color='orange.500' fontWeight={700} onClick={signOut}>
                             Cerrar Sesion
                         </MenuItem>
                 </MenuList>
