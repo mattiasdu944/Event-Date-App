@@ -7,7 +7,7 @@ const AuthContext = createContext();
 const AuthProvider = ({children}) => {
       const {data}= useSession()
       
-      // console.log(data)
+      console.log(data)
 
       const signInWithGoogle = () => {
         signIn('google')

@@ -4,7 +4,7 @@ import { Layout } from '../components/ui/Layout'
 const HomePage = () => {
 
   return (
-     <Layout title='Inicio' description='Ultimas noticias sobre los eventos'>
+     <Layout title='Inicio' description='Ultimas noticias y novedades de eventos'>
        Home Screen
        <button onClick={() => signOut()}>Sign out</button>
      </Layout>
