@@ -1,9 +1,9 @@
 import { useRef } from 'react'
 import { useAuth } from '../../hooks';
-import { avatar_links } from '../../constants';
+import { avatar_links, nav_links } from '../../constants';
 
 import { AiOutlineMenu } from "react-icons/ai";
-import { Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Button, List, ListItem, Text, Grid, Flex, WrapItem, Avatar, Box} from '@chakra-ui/react'
+import { Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Button, List, ListItem, Text, Grid, Flex, WrapItem, Avatar, Box, Divider} from '@chakra-ui/react'
 import { signOut } from 'next-auth/react';
 
 export const DrawerMenu = () => {
@@ -50,9 +50,19 @@ export const DrawerMenu = () => {
                         </Grid>
                         <List>
                             <Grid gap={3}>
-                                {avatar_links.map(enlace =>
+                                {nav_links.map(enlace =>
                                     <ListItem fontSize='lg' key={enlace.path}>
                                         <a href={enlace.path}>{enlace.name}</a>
+                                    </ListItem>
+                                )}
+                            </Grid>
+                            <Divider my={4}/>
+                            <Grid gap={3}>
+                                {avatar_links.map(enlace =>
+                                    <ListItem fontSize='lg' key={enlace.path}>
+                                        <a href={enlace.path}>
+                                            {enlace.name}
+                                        </a>
                                     </ListItem>
                                 )}
                             </Grid>

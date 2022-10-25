@@ -18,7 +18,7 @@ export async function getServerSideProps(ctx) {
   if( !session ){
     return{
       redirect:{
-        destination:'/auth/signin'
+        destination:'/auth/login'
       }
     }
   }

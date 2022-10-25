@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { useAuth } from "../../hooks";
-
-import { Avatar, Menu, MenuButton, MenuItem, MenuList, Portal, WrapItem } from '@chakra-ui/react'
-import { avatar_links } from '../../constants';
 import { signOut } from 'next-auth/react';
+import { useAuth } from "../../hooks";
+import { avatar_links } from '../../constants';
 
+import { Avatar, ListItem, Menu, MenuButton, MenuItem, MenuList, Portal, Text, WrapItem } from '@chakra-ui/react'
+import { BiExit } from "react-icons/bi";
 
 export const NavAvatar = () => {
     const { user } = useAuth();
@@ -13,25 +13,25 @@ export const NavAvatar = () => {
         <Menu>
             <MenuButton bgColor='orange.500' borderRadius='full'>
                 <WrapItem>
-                    <Avatar size='sm' name={user.name} src={user.image != '' ? user.image :'https://bit.ly/broken-link'} />
+                    <Avatar size='sm' name={user.name} src={user.image != '' ? user.image : 'https://bit.ly/broken-link'} />
                 </WrapItem>
             </MenuButton>
             <Portal>
                 <MenuList bgColor='blackAlpha.800'>
-                        {
-                            avatar_links.map(link =>          
-                                <MenuItem key={link.path}>
-                                    <Link href={link.path}>
-                                        {link.name}
-                                    </Link>
-                                </MenuItem>
-                            )
-                        }
-                        <MenuItem color='orange.500' fontWeight={700} onClick={signOut}>
-                            Cerrar Sesion
+                    {avatar_links.map(enlace =>
+                        <MenuItem fontSize='lg' key={enlace.path}>
+                            <a href={enlace.path}>
+                                <Text display='flex' alignItems='center' gap={3}>
+                                    {enlace.icon} {enlace.name}
+                                </Text>
+                            </a>
                         </MenuItem>
+                    )}
+                    <MenuItem color='orange.500' gap={3} fontWeight={700} onClick={signOut}>
+                        <BiExit/> Cerrar Sesion
+                    </MenuItem>
                 </MenuList>
             </Portal>
         </Menu>
-  )
+    )
 }

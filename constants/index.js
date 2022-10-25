@@ -1,19 +1,19 @@
+import { BiUser,BiCog,BiBell } from "react-icons/bi";
 export const avatar_links= [
     {
         name: 'Perfil',
         path: '/profile',
-    },
-    {
-        name: 'Seguidos',
-        path: '/seguidos',
+        icon: <BiUser/>
     },
     {
         name: 'Notificaciones',
         path: '/notificaciones',
+        icon: <BiBell/>
     },
     {
         name: 'Configuracion',
         path: '/configuracion',
+        icon: <BiCog/>
     }, 
 ]
 
