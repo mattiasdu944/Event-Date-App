@@ -1,10 +1,11 @@
 import { useState } from "react"
+import Link from "next/link";
 import { useAuth } from "../../hooks/useAuth";
 import { Button, ButtonGroup, Divider, Flex, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text, useToast } from "@chakra-ui/react"
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { FcGoogle } from "react-icons/fc";
 
-
-export const FormSignUp = ({setRegister}) => {
+export const FormSignUp = () => {
     const { signInWithCredentials, signInWithGoogle } = useAuth();
 
     const Toast = ( title, description, status ) => {
@@ -32,7 +33,6 @@ export const FormSignUp = ({setRegister}) => {
 
     const handleSubmit = e =>{
         e.preventDefault();
-        console.log(e)
 
         if(sigUp.name.trim() === '' || sigUp.email.trim() === '' || sigUp.lastname.trim() === '' || sigUp.password.trim() === ''){
             Toast('Datos Erroneos', 'Datos ingresados de manera incorrecta', 'error');
@@ -148,10 +148,10 @@ export const FormSignUp = ({setRegister}) => {
                         backgroundColor='transparent'
                         _hover={{ backgroundColor: 'transparent' }}
                         _active={{ backgroundColor: 'transparent' }}
-                        onClick={() => setRegister(true)}
-
                     >
-                        Ya tienes una cuenta? Inicia Sesion
+                        <Link href='/auth/login'>
+                            Ya tienes una cuenta? Inicia Sesion
+                        </Link>
                     </Button>
                     <Flex alignItems='center'>
                         <Divider
@@ -176,7 +176,8 @@ export const FormSignUp = ({setRegister}) => {
                         _hover={{ backgroundColor: "white.500" }}
                         _active={{ backgroundColor: "orange.500", color: "white.200" }}
                         onClick={signInWithGoogle}
-                    >
+                    >   
+                        <FcGoogle/>
                         Iniciar con Google
                     </Button>
                 </ButtonGroup>

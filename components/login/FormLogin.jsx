@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import Link from "next/link";
 
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { Button, ButtonGroup, Divider, Flex, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text, useToast,} from "@chakra-ui/react";
+import { FcGoogle } from "react-icons/fc";
 
-export const FormLogin = ({ setRegister }) => {
+export const FormLogin = () => {
   const { signInWithCredentials, signInWithGoogle } = useAuth();
   
   const [show, setShow] = useState(false);
@@ -39,7 +41,6 @@ export const FormLogin = ({ setRegister }) => {
 
     try {
       signInWithCredentials('',login.email, login.password,'login')
-      Toast("Registrado con exito", "ha iniciado sesion", "success");
     } catch (error) {
       console.log(error)
     }
@@ -106,9 +107,11 @@ export const FormLogin = ({ setRegister }) => {
             backgroundColor="transparent"
             _hover={{ backgroundColor: "transparent" }}
             _active={{ backgroundColor: "transparent" }}
-            onClick={() => setRegister(false)}
+            
           >
-            No tienes una cuenta? Registrate
+            <Link href='/auth/signup'>
+              No tienes una cuenta? Registrate
+            </Link>
           </Button>
           <Flex alignItems="center">
             <Divider
@@ -134,6 +137,7 @@ export const FormLogin = ({ setRegister }) => {
             _active={{ backgroundColor: "orange.500", color: "white.200" }}
             onClick={signInWithGoogle}
           >
+            <FcGoogle/>
             Iniciar con Google
           </Button>
         </ButtonGroup>
