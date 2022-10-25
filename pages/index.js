@@ -1,28 +1,58 @@
-import { getSession, signOut } from "next-auth/react"
 import { Layout } from '../components/ui/Layout'
+import { getSession } from "next-auth/react"
 
-const HomePage = () => {
+
+import { Text } from "@chakra-ui/react"
+import styled from "styled-components"
+
+const HomePage = ({session}) => {
+  const {user} = session
 
   return (
-     <Layout title='Inicio' description='Ultimas noticias y novedades de eventos'>
-       Home Screen
-       <button onClick={() => signOut()}>Sign out</button>
-     </Layout>
-   )
+    <Layout title='Inicio' description='Ultimas noticias y novedades de eventos'>
+      <Section>
+      <Text textAlign='center' fontWeight={700} fontSize={{ base: '24px', md: '40px', lg: '56px' }}>
+        Bienvenido
+      </Text>
+        <Text
+          fontWeight={800}
+          bgGradient='linear(to-r, orange.500 ,orange.200)'
+          bgClip='text'
+          fontSize={{ base: '24px', md: '40px', lg: '56px' }}
+        >
+          {user.name}
+        </Text >
+        <Text textAlign='center' fontWeight={700} fontSize={{ base: '24px', md: '40px', lg: '56px' }}>
+
+        Esto es Event Date <br /> y este proyecto esta aun en desarollo :D <br/>
+        Gracias por registrarte ♥
+        </Text>
+      </Section>
+    </Layout>
+  )
 }
 
 export default HomePage
 
+const Section = styled.section`
+justify-content: center;
+align-items: center;
+display: flex;
+flex-direction: column;
+  padding: 5rem 1rem 0;
+  min-height: 100vh;
+`
+
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx);
-  if( !session ){
-    return{
-      redirect:{
-        destination:'/auth/login'
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login'
       }
     }
   }
   return {
-    props: {}, 
+    props: {session},
   }
 }
