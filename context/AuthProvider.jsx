@@ -6,7 +6,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const { data, status } = useSession();
-  const [user, setUser] = useState({name:'', email:'', id:''});
+  const [user, setUser] = useState({name:'', email:'', id:'', image:''});
 
 
 

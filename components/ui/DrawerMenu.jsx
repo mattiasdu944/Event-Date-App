@@ -41,7 +41,7 @@ export const DrawerMenu = () => {
                     <DrawerBody>
                         <Grid mb={5} gap={5} alignItems='center'  justifyContent='center'>
                             <WrapItem alignItems='center' justifyContent='center'>
-                                <Avatar size='md' name={user.name} src='https://bit.ly/broken-link' />
+                                <Avatar size='lg' name={user.name} src={user.image} />
                             </WrapItem>
                             <Box textAlign='center'>
                                 <Text fontWeight={700}>{user.name}</Text>

@@ -10,7 +10,6 @@ export const checkEmailPassword = async( names, mail, password, tipo) => {
             return null;
         }
         //Validar la contraseña
-        // if( password != user.password){
         if( !bcrypt.compareSync(password, user.password) ){
             console.error('Contraseña incorrecta')
             return null;    
@@ -26,16 +25,13 @@ export const checkEmailPassword = async( names, mail, password, tipo) => {
     if( tipo === "register" ){
         
         if(user){
-            console.error('Estas credenciales ya existen')
             return null;
         }
 
         const passHashed = await bcrypt.hash(password,8);
-        await db.query('INSERT INTO usuarios (email, name, password) VALUES (?,?,?)', [mail, names, passHashed])
+        await db.query('INSERT INTO usuarios (email, name, password, image) VALUES (?,?,?,?)', [mail, names, passHashed,''])
         const [[newUser]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", mail);
-    
         const { name, email, id } = newUser
-    
         return {
             id,
             name,
@@ -45,25 +41,27 @@ export const checkEmailPassword = async( names, mail, password, tipo) => {
 }
 
 
-export const oAuthToDbUser = async (oAuthEmail, oAuthName) => {
+export const oAuthToDbUser = async (oAuthEmail, oAuthName, oAuthImage ) => {
     const [[user]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", oAuthEmail);
     
     if(user){
-        const { name, email, id } = user
+        const { name, email, id, image } = user
         return {
             id,
             name,
             email,
+            image,
         }
     }
-    await db.query('INSERT INTO usuarios (email, name, password) VALUES (?,?,?)', [oAuthEmail, oAuthName, '@'])
+    await db.query('INSERT INTO usuarios (email, name, password, image) VALUES (?,?,?,?)', [oAuthEmail, oAuthName, '@', oAuthImage])
    
     const [[newUser]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", oAuthEmail);
-    const { name, email, id } = newUser
+    const { name, email, id, image } = newUser
        
     return {
         id,
         name,
         email,
+        image,
     }
 }

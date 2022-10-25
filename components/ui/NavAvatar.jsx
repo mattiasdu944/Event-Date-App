@@ -9,12 +9,11 @@ import { signOut } from 'next-auth/react';
 export const NavAvatar = () => {
     const { user } = useAuth();
 
-    console.log(user)
     return (
         <Menu>
             <MenuButton bgColor='orange.500' borderRadius='full'>
                 <WrapItem>
-                    <Avatar size='sm' name={user.name} src='https://bit.ly/broken-link' />
+                    <Avatar size='sm' name={user.name} src={user.image != '' ? user.image :'https://bit.ly/broken-link'} />
                 </WrapItem>
             </MenuButton>
             <Portal>

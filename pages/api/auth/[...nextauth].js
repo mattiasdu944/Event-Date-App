@@ -6,6 +6,7 @@ import { dbUsers } from "../../../database"
 
 export default NextAuth({
     providers: [
+        
         Credentials({
             name:'Custom Login',
             credentials:{
@@ -18,6 +19,7 @@ export default NextAuth({
                 return await dbUsers.checkEmailPassword(credentials.name,credentials.email, credentials.password, credentials.tipo ); 
             }
         }),
+
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -33,11 +35,10 @@ export default NextAuth({
             
             if( account ){
                 token.accessToken = account.access_token;
-
                 switch(  account.type ){
 
                     case 'oauth':
-                        token.user = await dbUsers.oAuthToDbUser( user.email , user.name );
+                        token.user = await dbUsers.oAuthToDbUser( user.email , user.name, user.image );
                         break;
                 
                     case 'credentials':
