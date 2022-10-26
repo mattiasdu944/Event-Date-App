@@ -23,14 +23,14 @@ export const Header = () => {
                             Event Date
                         </Text>
                         <InputGroup width='-webkit-max-content'>
-                            <InputRightElement
+                            {/* <InputRightElement
                                 children={
                                     <IconButton>
                                         <FiSearch/>
 
                                     </IconButton>
                                 }
-                            />
+                            /> */}
 
                             <Input
                                 type="text"
