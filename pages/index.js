@@ -17,6 +17,7 @@ const HomePage = ({session}) => {
         <Text
           fontWeight={800}
           bgGradient='linear(to-r, orange.500 ,orange.200)'
+          textAlign='center'
           bgClip='text'
           fontSize={{ base: '24px', md: '40px', lg: '56px' }}
         >

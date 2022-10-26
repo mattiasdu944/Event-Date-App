@@ -15,7 +15,7 @@ export const DrawerMenu = () => {
     return (
 
         <>
-            <Button ref={btnRef} onClick={onOpen}>
+            <Button ref={btnRef} onClick={onOpen} bgColor='transparent' _active={{bgColor:'transparent'}} _hover={{bgColor:'transparent'}}>
                 <AiOutlineMenu />
             </Button>
             <Drawer
