@@ -12,13 +12,6 @@ const SignUp = () => {
   const { errorUserDb } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-      
-    if(router.query.error){
-      errorUserDb(router.pathname);
-    }
-   
-  }, [])
 
   return (
     <>
