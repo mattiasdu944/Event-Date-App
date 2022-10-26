@@ -1,16 +1,11 @@
 import Head from "next/head";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
-import { useAuth } from "../../hooks/useAuth";
 import { FormSignUp } from "../../components/signup/FormSignUp";
 
 import { Container, Text } from "@chakra-ui/react";
 import styled from "styled-components";
 
 const SignUp = () => {
-  const { errorUserDb } = useAuth();
-  const router = useRouter();
 
 
   return (

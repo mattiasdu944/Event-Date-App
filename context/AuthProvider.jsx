@@ -7,8 +7,6 @@ import { useRouter } from 'next/router';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const toast = useToast();
-  const router = useRouter();
   const { data, status } = useSession();
   const [user, setUser] = useState({name:'', email:'', id:'', image:''});
   const [errorUser, setErrorUser] = useState(false)
@@ -30,24 +28,11 @@ const AuthProvider = ({ children }) => {
     signIn('credentials', { name, email, password, tipo });
   }
 
-  const errorUserDb = ( path ) =>{ 
-    if( path ){
-      toast({
-        title:'Error en las credenciales',
-        description:'Revise los datos ingresados',
-        status: "error",
-        position: "top-right",
-        isClosable: true,
-        duration: 3000,
-      });
-    }
-  }
 
   return (
     <AuthContext.Provider value={{
       signInWithCredentials,
       signInWithGoogle,
-      errorUserDb,
       user,
     }}>
       {children}
