@@ -27,7 +27,7 @@ const SignUp = () => {
           name="description"
           content="Event Date - Iniciar sesion en la plataforma y comienza a disfrutar"
         />
-        <title>Event Date | Login</title>
+        <title>Event Date | Registro</title>
       </Head>
       <Section>
         <Container maxW="container.lg">
