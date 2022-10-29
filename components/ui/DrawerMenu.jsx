@@ -10,8 +10,6 @@ export const DrawerMenu = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
     const { user } = useAuth()
-    
-
     return (
 
         <>

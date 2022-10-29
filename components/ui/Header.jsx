@@ -1,10 +1,8 @@
 import { nav_links } from '../../constants';
 import { DrawerMenu, NavAvatar } from './';
-import { FiSearch } from "react-icons/fi";
 
-import { Box, Container, Flex, IconButton, Input, InputGroup, InputRightElement, List, ListItem, Text } from '@chakra-ui/react'
+import { Box, Container, Flex, Input, InputGroup, List, ListItem, Text } from '@chakra-ui/react'
 import styled from 'styled-components';
-
 
 export const Header = () => {
   return (
@@ -23,15 +21,6 @@ export const Header = () => {
                             Event Date
                         </Text>
                         <InputGroup width='-webkit-max-content'>
-                            {/* <InputRightElement
-                                children={
-                                    <IconButton>
-                                        <FiSearch/>
-
-                                    </IconButton>
-                                }
-                            /> */}
-
                             <Input
                                 type="text"
                                 placeholder="Realiza una busqueda"

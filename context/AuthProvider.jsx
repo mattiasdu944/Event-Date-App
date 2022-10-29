@@ -2,25 +2,19 @@ import { createContext, useEffect, useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 
 import { useToast } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const toast = useToast();
-  const router = useRouter();
   const { data, status } = useSession();
-  const [user, setUser] = useState({name:'', email:'', id:'', image:''});
-  const [errorUser, setErrorUser] = useState(false)
-
-
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     if( status === 'authenticated' ){
       setUser(data.user)
     }
   }, [status])
-  
 
   const signInWithGoogle = () => {
     signIn('google')

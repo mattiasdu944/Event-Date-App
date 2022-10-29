@@ -3,17 +3,16 @@ import { signOut } from 'next-auth/react';
 import { useAuth } from "../../hooks";
 import { avatar_links } from '../../constants';
 
-import { Avatar, ListItem, Menu, MenuButton, MenuItem, MenuList, Portal, Text, WrapItem } from '@chakra-ui/react'
+import { Avatar, Menu, MenuButton, MenuItem, MenuList, Portal, Text, WrapItem } from '@chakra-ui/react'
 import { BiExit } from "react-icons/bi";
 
 export const NavAvatar = () => {
     const { user } = useAuth();
-
     return (
         <Menu>
             <MenuButton bgColor='orange.500' borderRadius='full'>
                 <WrapItem>
-                    <Avatar size='sm' name={user.name} src={user.image != '' ? user.image : 'https://bit.ly/broken-link'} />
+                    <Avatar size='sm' name={user.name} src={user.image} />
                 </WrapItem>
             </MenuButton>
             <Portal>
