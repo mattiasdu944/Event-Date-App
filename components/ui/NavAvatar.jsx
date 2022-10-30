@@ -18,7 +18,7 @@ export const NavAvatar = () => {
             <Portal>
                 <MenuList bgColor='blackAlpha.800'>
                     {avatar_links.map(enlace =>
-                        <MenuItem fontSize='lg' key={enlace.path}>
+                        <MenuItem fontSize='lg' key={enlace.path} _hover={{bg:'#080910'}} _active={{bg:'#080910'}}>
                             <a href={enlace.path}>
                                 <Text display='flex' alignItems='center' gap={3}>
                                     {enlace.icon} {enlace.name}

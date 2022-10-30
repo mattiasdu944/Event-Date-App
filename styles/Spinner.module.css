@@ -3,6 +3,7 @@
     min-height: 80vh;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 .spinner {
     margin: 100px auto 0;
