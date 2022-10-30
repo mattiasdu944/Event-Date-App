@@ -1,17 +1,14 @@
 import Head from "next/head"
 import { useSession } from "next-auth/react"
-import { Header } from "./Header"
+import { Header,Spinner } from "./"
 
 export const Layout = ({title, description, children}) => {
     const {status} = useSession();
 
     if (status != 'authenticated'){
-      return(
-        <>
-          Cargando
-        </>
-      )
+      return <Spinner/>
     }
+
     return (
 
       <>
@@ -21,9 +18,8 @@ export const Layout = ({title, description, children}) => {
         </Head>
         <Header/>
         <main>
-
           {children} 
-          
+
         </main>
       </>
     )
