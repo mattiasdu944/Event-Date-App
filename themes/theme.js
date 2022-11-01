@@ -29,4 +29,19 @@ export const theme = extendTheme({
       },
     },
   },
+  textStyles: {
+    h1: {
+      // you can also use responsive styles
+      fontSize: ['48px', '4rem'],
+      fontWeight: 'bold',
+      lineHeight: '110%',
+      letterSpacing: '-2%',
+    },
+    h2: {
+      fontSize: ['36px', '2.5rem'],
+      fontWeight: 'semibold',
+      lineHeight: '110%',
+      letterSpacing: '-1%',
+    },
+  },
 })
