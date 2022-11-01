@@ -4,10 +4,10 @@ import { getSession } from "next-auth/react"
 
 import { Text } from "@chakra-ui/react"
 import styled from "styled-components"
+import axios from 'axios'
 
 const HomePage = ({session}) => {
   const {user} = session
-
   return (
     <Layout title='Inicio' description='Ultimas noticias y novedades de eventos'>
       <Section>
@@ -45,14 +45,19 @@ flex-direction: column;
 `
 
 export async function getServerSideProps(ctx) {
+  const res = await axios.get('http://localhost:3000/api/usuario')
+  // const data = await res.json()
+  console.log(res);
   const session = await getSession(ctx);
+
   if (!session) {
     return {
       redirect: {
-        destination: '/auth/login'
-      }
+        destination: '/auth/login',
+      },
     }
   }
+
   return {
     props: {session},
   }
