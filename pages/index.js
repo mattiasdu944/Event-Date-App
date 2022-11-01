@@ -45,9 +45,6 @@ flex-direction: column;
 `
 
 export async function getServerSideProps(ctx) {
-  const res = await axios.get('http://localhost:3000/api/usuario')
-  // const data = await res.json()
-  console.log(res);
   const session = await getSession(ctx);
 
   if (!session) {
