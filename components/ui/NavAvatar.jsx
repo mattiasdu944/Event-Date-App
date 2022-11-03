@@ -18,13 +18,13 @@ export const NavAvatar = () => {
             <Portal>
                 <MenuList bgColor='blackAlpha.800'>
                     {avatar_links.map(enlace =>
-                        <MenuItem fontSize='lg' key={enlace.path} _hover={{bg:'#080910'}} _active={{bg:'#080910'}}>
-                            <a href={enlace.path}>
-                                <Text display='flex' alignItems='center' gap={3}>
-                                    {enlace.icon} {enlace.name}
-                                </Text>
-                            </a>
-                        </MenuItem>
+                            <Link href={enlace.path} key={enlace.path}>
+                                <MenuItem fontSize='lg'  _hover={{bg:'#080910'}} _active={{bg:'#080910'}}>
+                                        <Text display='flex' alignItems='center' gap={3}>
+                                            {enlace.icon} {enlace.name}
+                                        </Text>
+                                </MenuItem>
+                            </Link>
                     )}
                     <MenuItem color='orange.500' gap={3} fontWeight={700} onClick={signOut}>
                         <BiExit/> Cerrar Sesion

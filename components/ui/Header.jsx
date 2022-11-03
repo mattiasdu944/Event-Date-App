@@ -3,6 +3,7 @@ import { DrawerMenu, NavAvatar } from './';
 
 import { Box, Container, Flex, Input, InputGroup, List, ListItem, Text } from '@chakra-ui/react'
 import styled from 'styled-components';
+import Link from 'next/link';
 
 export const Header = () => {
   return (
@@ -34,7 +35,9 @@ export const Header = () => {
                             <Flex gap={5}>
                                 {nav_links.map(enlace => 
                                     <ListItem key={enlace.path}>
-                                        <a href={enlace.path}>{enlace.name}</a>
+                                        <Link href={enlace.path}>
+                                            <a >{enlace.name}</a>
+                                        </Link>
                                     </ListItem>
                                 )}
                             </Flex>

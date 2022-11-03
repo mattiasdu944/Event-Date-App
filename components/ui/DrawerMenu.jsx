@@ -5,6 +5,7 @@ import { avatar_links, nav_links } from '../../constants';
 import { AiOutlineMenu } from "react-icons/ai";
 import { Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Button, List, ListItem, Text, Grid, Flex, WrapItem, Avatar, Box, Divider} from '@chakra-ui/react'
 import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 
 export const DrawerMenu = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -49,9 +50,11 @@ export const DrawerMenu = () => {
                         <List>
                             <Grid gap={3}>
                                 {nav_links.map(enlace =>
-                                    <ListItem fontSize='lg' key={enlace.path}>
-                                        <a href={enlace.path}>{enlace.name}</a>
+                                        <Link href={enlace.path} key={enlace.path}>
+                                    <ListItem fontSize='lg' >
+                                            <a>{enlace.name}</a>
                                     </ListItem>
+                                        </Link>
                                 )}
                             </Grid>
                             <Divider my={4}/>
