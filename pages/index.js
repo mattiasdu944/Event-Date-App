@@ -1,10 +1,8 @@
 import { Layout } from '../components/ui/Layout'
 import { getSession } from "next-auth/react"
 
-
 import { Text } from "@chakra-ui/react"
 import styled from "styled-components"
-import axios from 'axios'
 
 const HomePage = ({session}) => {
   const {user} = session

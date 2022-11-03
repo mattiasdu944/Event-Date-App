@@ -1,26 +1,25 @@
-import { getSession, useSession } from "next-auth/react";
-import { usuarioApi } from "../../apis";
 import { Layout } from "../../components/ui";
 
 import styled from "styled-components";
-import { Avatar, Box, Container, Flex, Text, WrapItem } from "@chakra-ui/react";
+import { Avatar, Box, Container, Text, WrapItem } from "@chakra-ui/react";
+import { useAuth } from "../../hooks";
+import usuarioApi from "../../apis/usuarioApi";
 import { useEffect, useState } from "react";
+import { getSession } from "next-auth/react";
 
 const Profile = () => {
   const [perfil, setPerfil] = useState({})
-  const {data : {user}}  = useSession()
-    
-  const getUserProfile = async () =>{
-    // console.log(user.id);
-    const {data} = await usuarioApi.get(`http://localhost:3000/api/usuario/${user.id}`)
-    setPerfil(data)
+  
+  const getUserProfile = async () => {
+    const {user} = await getSession()
+    if(user){
+      const {data} = await usuarioApi.get(`/usuario/${user.id}`)
+      setPerfil(data)
+    }
   }
 
-  useEffect(() => {
+  useEffect (() => {
     getUserProfile();
-    
-    console.log(perfil);
-  
   }, [])
   
 
@@ -53,7 +52,7 @@ const Profile = () => {
               Descripcion
             </Text>
             <Text>
-              {perfil.descripcion === '' ? 'No hay descripcion de este perfil' : perfil.descripcion}
+              {perfil.descripcion ? perfil.descripcion :  'No hay descripcion de este perfil' }
             </Text>
           </Box>
         </Container>
@@ -70,19 +69,13 @@ const Section = styled.section`
   padding: 5rem 1rem 0;
   min-height: 100vh;
 `
+// export async function getServerSideProps(){
+//   const {data} = await usuarioApi.get('usuario/7');
+//   console.log(data);
 
-// export async function getServerSideProps(ctx) {
-//   try {
-//     const { user } = await getSession(ctx)
-//     const { data } = await usuarioApi.get(`/usuario/${user.id}`)
-//     return {
-//       props: {
-//         perfil: data
-//       },
+//   return{
+//     props:{
+//       perfil:data
 //     }
-
-//   } catch (error) {
-//     console.log(error);
-//     return;
 //   }
 // }
