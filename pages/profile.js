@@ -4,6 +4,7 @@ import { Layout } from "../components/ui";
 
 import styled from "styled-components";
 import { Avatar, Box, Container, Text, WrapItem } from "@chakra-ui/react";
+import axios from "axios";
 
 const Profile = ({perfil}) => {
   
