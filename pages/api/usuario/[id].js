@@ -15,12 +15,12 @@ const  getUserById = async (req,res) => {
     const {id} = req.query
     
     let [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE id = ?", id); 
-    let [[eventos]] = await db.query("SELECT * FROM v_usuario_evento WHERE id = ?", id); 
+    let [eventos] = await db.query("SELECT * FROM v_usuario_evento WHERE id = ?", id); 
     if( !user ){
-        return null;
+        return res.status(200).json(null);
     }
     if(!eventos){
-        eventos = {}
+        eventos = null
     }
 
     const usuario = {...user, eventos}
