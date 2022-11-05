@@ -5,6 +5,7 @@ export const checkEmailPassword = async( names, mail, password, tipo) => {
     const [[user]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", mail);
 
     if( tipo === "login"){
+        console.log(user)
         if(!user){
             console.error('No existe el usuario')
             return null;
@@ -23,15 +24,16 @@ export const checkEmailPassword = async( names, mail, password, tipo) => {
     }
     
     if( tipo === "register" ){
-        
+    
         if(user){
             return null;
         }
-
         const passHashed = await bcrypt.hash(password,8);
+
         await db.query('INSERT INTO usuarios (email, name, password, image) VALUES (?,?,?,?)', [mail, names, passHashed,''])
         const [[newUser]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", mail);
         const { name, email, id } = newUser
+        await db.query('INSERT INTO data_usuario (usuario, descripcion, telefono, ciudad) VALUES (?,?,?,?)', [id, '', '',1])
         return {
             id,
             name,
@@ -53,10 +55,12 @@ export const oAuthToDbUser = async (oAuthEmail, oAuthName, oAuthImage ) => {
             image,
         }
     }
+    
     await db.query('INSERT INTO usuarios (email, name, password, image) VALUES (?,?,?,?)', [oAuthEmail, oAuthName, '@', oAuthImage])
-   
     const [[newUser]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", oAuthEmail);
     const { name, email, id, image } = newUser
+    await db.query('INSERT INTO data_usuario (usuario, descripcion, telefono, ciudad) VALUES (?,?,?,?)', [id, '', '',1])
+
        
     return {
         id,

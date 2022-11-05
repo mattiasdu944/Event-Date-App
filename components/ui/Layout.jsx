@@ -10,7 +10,7 @@ export const Layout = ({ title, description, children }) => {
   if (status == 'authenticated') {
     setTimeout(() => {
       setLoading(false)
-    }, 1500);
+    }, 1000);
   }
 
   return (
