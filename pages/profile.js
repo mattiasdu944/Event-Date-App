@@ -1,11 +1,12 @@
 import { useUser } from "../hooks";
 import { Layout } from "../components/ui";
+import { Perfil } from "../components/profile";
 
 import styled from "styled-components";
-import { Avatar, Box, Container, Text, WrapItem } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 
 const Profile = () => {
-  const {perfil} = useUser();
+  const { perfil } = useUser();
 
   return (
     <Layout
@@ -13,31 +14,10 @@ const Profile = () => {
       description={`Perfil de  en Event Date`}
     >
       <Section>
-        <Container maxW='container.lg'>
-
-          <Box display={{ md: 'flex' }} alignItems='center' justifyContent='center' gap={5} mb='3rem'>
-            <Box display='flex' alignItems='center' justifyContent='center'>
-              <WrapItem border='4px' borderColor='orange.500' rounded='full'>
-                <Avatar size={{ base: 'xl', md: '2xl' }} name={perfil.name} src={perfil.image} />
-              </WrapItem>
-            </Box>
-            <Box textAlign={{ base: 'center', md: 'start' }}>
-              <Text textStyle='h2' fontWeight={700}>
-                {perfil.name}
-              </Text>
-              <Text>
-                {perfil.email}
-              </Text>
-            </Box>
-          </Box>
-          <Box>
-            <Text textStyle='h2'>
-              Descripcion
-            </Text>
-            <Text>
-              {perfil.descripcion ? perfil.descripcion :  'No hay descripcion de este perfil' }
-            </Text>
-          </Box>
+        <Container maxW='container.sm'>
+        <Perfil
+          perfil={perfil}
+        />  
         </Container>
       </Section>
 
