@@ -24,7 +24,8 @@ export const theme = extendTheme({
     global: {
       // styles for the `body`
       body: {
-        bg: '#111222',
+        // bg: '#111222',
+        bg:'#000910',
         color: 'white',
       },
     },
@@ -39,6 +40,12 @@ export const theme = extendTheme({
     },
     h2: {
       fontSize: ['36px', '2.5rem'],
+      fontWeight: 'semibold',
+      lineHeight: '110%',
+      letterSpacing: '-1%',
+    },
+    h3: {
+      fontSize: ['26px', '2rem'],
       fontWeight: 'semibold',
       lineHeight: '110%',
       letterSpacing: '-1%',
