@@ -62,4 +62,6 @@ const Nav = styled.nav`
     position: fixed;
     background-color: #00000084;
     border-bottom:1px solid #fefefe2e;
+    z-index: 10000;
 `;
+
