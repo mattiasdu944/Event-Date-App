@@ -16,7 +16,7 @@ const  getUserById = async (req,res) => {
     
     const [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE id = ?", id); 
     if( !user ){
-        return res.status(400).json({message:'Bad request'})
+        return null
     }
 
     res.status(200).json(user);

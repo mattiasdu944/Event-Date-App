@@ -1,14 +1,11 @@
-import usuarioApi from "../apis/usuarioApi";
-import { getSession } from "next-auth/react";
+import { useUser } from "../hooks";
 import { Layout } from "../components/ui";
 
 import styled from "styled-components";
 import { Avatar, Box, Container, Text, WrapItem } from "@chakra-ui/react";
-import axios from "axios";
 
-const Profile = ({perfil}) => {
-  
-
+const Profile = () => {
+  const {perfil} = useUser();
 
   return (
     <Layout
@@ -57,13 +54,13 @@ const Section = styled.section`
 `
 
 
-export async function getServerSideProps (context) {
-    const {user} = await getSession(context);
-    const {data} = await usuarioApi.get(`usuario/${user.id}`);
-    return{
-        props:{
-            perfil:data
+// export async function getServerSideProps (context) {
+//     const {user} = await getSession(context);
+//     const {data} = await usuarioApi.get(`usuario/${user.id}`);
+//     return{
+//         props:{
+//             perfil:data
             
-        }
-    }
-}
+//         }
+//     }
+// }
