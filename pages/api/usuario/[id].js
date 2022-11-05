@@ -14,7 +14,7 @@ export default async function handler(req, res){
 const  getUserById = async (req,res) => {
     const {id} = req.query
     
-    const [[user]] = await db.query("SELECT * FROM v_usuario_perfil WHERE id_usuario = ?", id); 
+    const [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE id_usuario = ?", id); 
     if( !user ){
         return res.status(400).json({message:'Bad request'})
     }

@@ -11,7 +11,7 @@ export default async function handler(req, res){
 
 const getDataUser = async ( req, res ) => {
     // console.log(req);
-    const [[user]] = await db.query("SELECT * FROM v_usuario_perfil WHERE id_usuario = ?",6); 
+    const [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE id_usuario = ?",6); 
     res.status(200).json(user);
 
 }
