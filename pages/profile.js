@@ -53,14 +53,3 @@ const Section = styled.section`
   min-height: 100vh;
 `
 
-
-// export async function getServerSideProps (context) {
-//     const {user} = await getSession(context);
-//     const {data} = await usuarioApi.get(`usuario/${user.id}`);
-//     return{
-//         props:{
-//             perfil:data
-            
-//         }
-//     }
-// }

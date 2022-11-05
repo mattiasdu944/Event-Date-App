@@ -14,10 +14,16 @@ export default async function handler(req, res){
 const  getUserById = async (req,res) => {
     const {id} = req.query
     
-    const [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE id = ?", id); 
+    let [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE id = ?", id); 
+    let [[eventos]] = await db.query("SELECT * FROM v_usuario_evento WHERE id = ?", id); 
     if( !user ){
-        return null
+        return null;
+    }
+    if(!eventos){
+        eventos = {}
     }
 
-    res.status(200).json(user);
+    const usuario = {...user, eventos}
+
+    res.status(200).json(usuario);
 }

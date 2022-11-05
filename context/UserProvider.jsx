@@ -16,6 +16,9 @@ const UserProvider = ({ children }) => {
     const getUserProfile = async () => {
         const {data} = await usuarioApi.get(`usuario/${user.id}`);
         setPerfil(data);
+    }
+    console.log(perfil);
+    const getUserEvents = async () => {
 
     }
 
