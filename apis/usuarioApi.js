@@ -1,6 +1,6 @@
 import axios from "axios";
 const usuarioApi = axios.create({
-    baseURL:`/api`
+    baseURL:`${process.env.HOSTING}/api`
 })
 
 export default usuarioApi;

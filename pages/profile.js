@@ -1,33 +1,18 @@
-import { Layout } from "../../components/ui";
+import usuarioApi from "../apis/usuarioApi";
+import { getSession } from "next-auth/react";
+import { Layout } from "../components/ui";
 
 import styled from "styled-components";
 import { Avatar, Box, Container, Text, WrapItem } from "@chakra-ui/react";
-import { useAuth } from "../../hooks";
-import usuarioApi from "../../apis/usuarioApi";
-import { useEffect, useState } from "react";
-import { getSession } from "next-auth/react";
 
-const Profile = () => {
-  const [perfil, setPerfil] = useState({})
-  
-  const getUserProfile = async () => {
-    const {user} = await getSession()
-    if(user){
-      const {data} = await usuarioApi.get(`/usuario/${user.id}`)
-      setPerfil(data)
-    }
-  }
-
-  useEffect (() => {
-    getUserProfile();
-  }, [])
+const Profile = ({perfil}) => {
   
 
 
   return (
     <Layout
       title='Perfil'
-      description={`Perfil de ${perfil.name} en Event Date`}
+      description={`Perfil de  en Event Date`}
     >
       <Section>
         <Container maxW='container.lg'>
@@ -69,13 +54,15 @@ const Section = styled.section`
   padding: 5rem 1rem 0;
   min-height: 100vh;
 `
-// export async function getServerSideProps(){
-//   const {data} = await usuarioApi.get('usuario/7');
-//   console.log(data);
 
-//   return{
-//     props:{
-//       perfil:data
-//     }
-//   }
-// }
+
+export async function getServerSideProps (context) {
+    const {user} = await getSession(context);
+    const {data} = await usuarioApi.get(`usuario/${user.id}`);
+    return{
+        props:{
+            perfil:data
+            
+        }
+    }
+}
