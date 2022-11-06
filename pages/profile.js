@@ -1,6 +1,6 @@
 import { useUser } from "../hooks";
 import { Layout } from "../components/ui";
-import { Perfil } from "../components/profile";
+import { Perfil, TabMenu } from "../components/profile";
 
 import styled from "styled-components";
 import { Container } from "@chakra-ui/react";
@@ -14,10 +14,11 @@ const Profile = () => {
       description={`Perfil de  en Event Date`}
     >
       <Section>
-        <Container maxW='container.sm'>
+        <Container maxW='container.md'>
         <Perfil
           perfil={perfil}
         />  
+        <TabMenu/>
         </Container>
       </Section>
 
@@ -29,7 +30,11 @@ export default Profile
 
 const Section = styled.section`
   flex-direction: column;
-  padding: 5rem 1rem 0;
+  padding: 5rem 0rem 2rem;
+  background-image: linear-gradient(to right, rgb( 0 0 0 / .6), rgb(0 0 0 / .8)), url("https://images.pexels.com/photos/7130475/pexels-photo-7130475.jpeg?auto=compress&cs=tinysrgb&w=1600");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   min-height: 100vh;
 `
 

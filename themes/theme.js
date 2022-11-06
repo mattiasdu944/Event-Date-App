@@ -25,7 +25,7 @@ export const theme = extendTheme({
       // styles for the `body`
       body: {
         // bg: '#111222',
-        bg:'#000910',
+        bg: '#000910',
         color: 'white',
       },
     },
