@@ -18,7 +18,6 @@ const UserProvider = ({ children }) => {
         setPerfil(data);
     }
     
-    console.log(perfil);
     const getUserEvents = async () => {
 
     }
