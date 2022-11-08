@@ -20,7 +20,7 @@ export const Layout = ({ title, description, children }) => {
         <meta name="description" content={`Èvent Date - ${description}`} />
         <title>{`Event Date | ${title}`}</title>
       </Head>
-        { loading 
+      {/* { loading 
         ? <Spinner/> 
         : <>
             <Header />
@@ -28,7 +28,13 @@ export const Layout = ({ title, description, children }) => {
               {children}
             </main>
           </>
-        }
+        } */}
+
+      <Header />
+      <main>
+        {children}
+      </main>
+
 
     </>
   )

@@ -6,11 +6,12 @@ import { Box, Text } from '@chakra-ui/react'
 import { BiCalendar, BiMap, BiTime } from 'react-icons/bi'
 
 export const Evento = ({ evento }) => {
+    console.log(evento)
     return (
         <Link href={evento.slug}>   
             <Card>
                 <div>
-                    <Image src={evento.image} alt={evento.titulo} height='200' width='300' layout='responsive' />
+                    <Image priority src={evento.imagen_evento} alt={evento.titulo} height='200' width='300' layout='responsive' />
                 </div>
                 <Box display='flex' height='100%' gap='2rem' flexDirection='column' p={4}>
                     <Box>
@@ -37,7 +38,7 @@ const Card = styled.div`
     border-radius: .25rem;
     gap: 1rem;
     backdrop-filter: blur(8px);
-    border: solid #fefefe2e;
+    border: 1px solid #fefefe2e;
     background-color: #00000040;
     transition-property: transform;
     transition-duration: .3s;

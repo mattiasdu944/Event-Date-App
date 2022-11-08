@@ -1,12 +1,15 @@
 import { useUser } from "../hooks";
-import { Layout } from "../components/ui";
+import { Layout, Spinner } from "../components/ui";
 import { Perfil, TabMenu } from "../components/profile";
 
 import styled from "styled-components";
 import { Container } from "@chakra-ui/react";
 
+
+
+
 const Profile = () => {
-  const { perfil } = useUser();
+  const { perfil, isLoading, error } = useUser();
 
   return (
     <Layout
@@ -15,10 +18,21 @@ const Profile = () => {
     >
       <Section>
         <Container maxW='container.md'>
-        <Perfil
-          perfil={perfil}
-        />  
-        <TabMenu/>
+          {
+            isLoading
+              ?
+              <Spinner />
+              :
+              <>
+                <Perfil
+                  perfil={perfil}
+                />
+                <TabMenu
+                  perfil={perfil}
+                />
+              </>
+          }
+
         </Container>
       </Section>
 

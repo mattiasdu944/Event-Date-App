@@ -8,7 +8,7 @@ export const Spinner = () => {
                 <div className={styles.bounce2}></div>
                 <div className={styles.bounce3}></div>
             </div>
-            <Text>Cargando Eventos</Text>
+            <Text>Cargando</Text>
         </div>
     )
 }

@@ -7,7 +7,7 @@ const nextConfig = {
     styledComponents: true
   },
   images: {
-    domains: ['images.pexels.com'],
+    domains: ['images.pexels.com','upload.wikimedia.org'],
   },
 }
 
