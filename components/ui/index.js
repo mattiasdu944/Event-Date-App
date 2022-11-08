@@ -1,4 +1,5 @@
 export * from './DrawerMenu'
+export * from './Evento'
 export * from './Header'
 export * from './Layout'
 export * from './NavAvatar'

@@ -13,7 +13,7 @@ export const Perfil = ({ perfil }) => {
         <>
             <Box display='flex' flexDirection='column' >
                 <Box display={{ md: 'flex' }} alignItems='center' justifyContent='center' gap='3rem' mb='3rem'>
-                    <Box display='flex' alignItems='center' justifyContent='center'>
+                    <Box display='flex' alignItems='center' mb={5} justifyContent='center'>
                         <WrapItem rounded='full'>
                             <Avatar size={{ base: 'xl', md: '2xl' }} name={perfil.name} src={perfil.image} />
                         </WrapItem>
@@ -29,14 +29,14 @@ export const Perfil = ({ perfil }) => {
                         {perfil.descripcion &&
                             <Accordion allowToggle my={2}>
                                 <AccordionItem>
-                                    <h2>
-                                        <AccordionButton px='0'>
-                                            <Box color='gray.300' textAlign='left' px='0'>
+                                    <Text>
+                                        <AccordionButton px='0' textAlign='center' justifyContent={{base:'center', md:'space-between'}}>
+                                            <Box color='gray.300'  px='0'>
                                                 Descripcion
                                             </Box>
                                             <AccordionIcon />
                                         </AccordionButton>
-                                    </h2>
+                                    </Text>
                                     <AccordionPanel pb={4} px='0'>
                                         <Text color='gray.300' textAlign='justify' fontSize='.9rem'>
                                             {perfil.descripcion ? perfil.descripcion : 'No hay descripcion de este perfil'}
@@ -46,7 +46,7 @@ export const Perfil = ({ perfil }) => {
                             </Accordion>
                         }
 
-                        <Box display='flex' justifyContent={{ base: 'center', md: 'start' }} gap={7} color='gray.300'>
+                        <Box display='flex' justifyContent={{ base: 'center', md: 'start' }} gap={7} mb={3} color='gray.300'>
                             <Text display='flex' alignItems='center' gap={1}>
                                 <BiMap />
                                 {perfil.ciudad}
@@ -55,7 +55,7 @@ export const Perfil = ({ perfil }) => {
                                 {perfil.telefono && <><BsTelephone /> {perfil.telefono}</>}
                             </Text>
                         </Box>
-                        <Button colorScheme='orange' mt={2} py={1} alignItems='center' variant='outline' width='100%'>
+                        <Button color='orange.200' borderColor='orange.200' _hover={{bg:'transparent'}} _active={{bg:'transparent'}} mt={2} py={1} alignItems='center' variant='outline' width='100%'>
                             Editar Perfil
                         </Button>
                     </Box>

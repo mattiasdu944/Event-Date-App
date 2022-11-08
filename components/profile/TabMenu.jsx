@@ -1,5 +1,6 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import { Eventos } from './'
+import { Evento } from '../ui'
+
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Text } from '@chakra-ui/react'
 import styled from 'styled-components'
 
 export const TabMenu = () => {
@@ -14,6 +15,7 @@ export const TabMenu = () => {
             hora_evento:'12:00 pm',
             localizacion_evento:'La paz - Bolivia',
             direccion_evento:'Casco viejo - Avenida del ejercito - Teatro al aire libre',
+            slug:'concierto_colplay'
         },
         {
             id:'2',
@@ -24,6 +26,8 @@ export const TabMenu = () => {
             hora_evento:'12:00 pm',
             localizacion_evento:'La paz - Bolivia',
             direccion_evento:'Casco viejo - Avenida del ejercito - Teatro al aire libre',
+            slug:'concierto_colplay'
+
         },
         {
             id:'3',
@@ -34,12 +38,13 @@ export const TabMenu = () => {
             hora_evento:'12:00 pm',
             localizacion_evento:'La paz - Bolivia',
             direccion_evento:'Casco viejo - Avenida del ejercito - Teatro al aire libre',
+            slug:'concierto_colplay'
         }
     ]
 
     return (
         <>
-            <Tabs colorScheme='orange.200' size={{base:'sm', md:'md'}} variant='enclosed'>
+            <Tabs colorScheme='orange.200' size={{base:'sm', md:'md'}} variant='enclosed' borderColor='gray.700'>
                 <TabList color='orange.200'>
                     <Tab>Eventos</Tab>
                     <Tab>Seguidores</Tab>
@@ -48,14 +53,28 @@ export const TabMenu = () => {
 
                 <TabPanels>
                     <TabPanel> 
-                        <Listado>
-                            {eventos.map(evento => 
-                                <Eventos
-                                    key={evento.id}
-                                    evento={evento}
-                                />   
-                            )}
-                        </Listado>
+
+                        {eventos.length > 0
+                            ? 
+                            <Listado>
+                                {eventos.map(evento => 
+                                    <Evento
+                                        key={evento.id}
+                                        evento={evento}
+                                    />   
+                                )}
+                            </Listado>
+                            :
+                            <Box h='20vh' w='100%' alignItems='center' textAlign='center' gap={1} justifyContent='center' display='flex' flexDirection='column'>
+                                <Text textStyle='h3' color='whiteAlpha.400'>
+                                    Aun no tienes eventos
+                                </Text>
+                                <Text textStyle='h3' color='whiteAlpha.400'>
+                                    {'¯_(ツ)_/¯'}
+                                </Text>
+                            </Box>
+                        }
+
                     </TabPanel>
                     <TabPanel>
                         <p>two!</p>
@@ -73,5 +92,5 @@ export const TabMenu = () => {
 const Listado = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+    gap: 2rem;
 `
