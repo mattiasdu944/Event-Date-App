@@ -24,7 +24,7 @@ export const DrawerMenu = () => {
                 finalFocusRef={btnRef}
             >
                 <DrawerOverlay />
-                <DrawerContent backdropFilter='auto' bgBlendMode='color' bgColor='blackAlpha.700' backdropBlur='5px'>
+                <DrawerContent backdropFilter='auto' bgBlendMode='color' bgColor='blackAlpha.700' backdropBlur='5px' zIndex='10000000'>
                     <DrawerCloseButton />
                     <DrawerHeader>
                         <Text

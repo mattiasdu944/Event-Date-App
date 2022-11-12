@@ -39,7 +39,7 @@ export const theme = extendTheme({
       letterSpacing: '-2%',
     },
     h2: {
-      fontSize: ['36px', '2.5rem'],
+      fontSize: ['36px', '3rem'],
       fontWeight: 'semibold',
       lineHeight: '110%',
       letterSpacing: '-1%',

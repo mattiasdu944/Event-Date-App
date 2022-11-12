@@ -1,31 +1,48 @@
-import { Layout } from '../components/ui/Layout'
+import { useEvento } from '../hooks'
 import { getSession } from "next-auth/react"
+import { Layout } from '../components/ui/Layout'
+import { ListadoEventos } from '../components/index'
+import { Spinner } from '../components/ui'
 
-import { Text } from "@chakra-ui/react"
+
 import styled from "styled-components"
+import { Box, Container, Text } from "@chakra-ui/react"
 
-const HomePage = ({session}) => {
-  const {user} = session
+const HomePage = () => {
+
+  const {eventos, isLoading } = useEvento();
+
   return (
     <Layout title='Inicio' description='Ultimas noticias y novedades de eventos'>
       <Section>
-      <Text textAlign='center' fontWeight={700} fontSize={{ base: '24px', md: '40px', lg: '56px' }}>
-        Bienvenido
-      </Text>
-        <Text
-          fontWeight={800}
-          bgGradient='linear(to-r, orange.500 ,orange.200)'
-          textAlign='center'
-          bgClip='text'
-          fontSize={{ base: '24px', md: '40px', lg: '56px' }}
-        >
-          {user.name}
-        </Text >
-        <Text textAlign='center' fontWeight={700} fontSize={{ base: '24px', md: '40px', lg: '56px' }}>
+        <Container maxW='container.lg'>
+          <Box>
+            <Text textStyle='h2' mb={5} fontWeight={700}>
+              Ultimos Eventos
+            </Text>
 
-        Esto es Event Date <br /> y este proyecto esta aun en desarollo :D <br/>
-        Gracias por registrarte ♥
-        </Text>
+            {
+              isLoading
+              ? <Box minH='100vh'> <Spinner/> </Box>
+              : <ListadoEventos eventos={ eventos } />
+            }
+            
+          </Box>
+
+          <Box>
+            <Text fontWeight={700} fontSize={{ base: '24px', md: '40px', lg: '56px' }}>
+              Ultimos Eventos
+            </Text>
+          </Box>
+
+          <Box>
+            <Text fontWeight={700} fontSize={{ base: '24px', md: '40px', lg: '56px' }}>
+              Ultimos Eventos
+            </Text>
+          </Box>
+
+
+        </Container>
       </Section>
     </Layout>
   )
@@ -34,10 +51,6 @@ const HomePage = ({session}) => {
 export default HomePage
 
 const Section = styled.section`
-justify-content: center;
-align-items: center;
-display: flex;
-flex-direction: column;
   padding: 5rem 1rem 0;
   min-height: 100vh;
 `
@@ -54,6 +67,6 @@ export async function getServerSideProps(ctx) {
   }
 
   return {
-    props: {session},
+    props: { session },
   }
 }

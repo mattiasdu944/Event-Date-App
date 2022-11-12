@@ -21,7 +21,7 @@ const getAllEvents = async (req, res) => {
         return res.status(200).json(eventos)     
     }
 
-    const [eventos] = await db.query('SELECT * from v_evento_categoria') 
+    const [eventos] = await db.query('SELECT * from v_evento_categoria ORDER BY id DESC;') 
 
     return res.status(200).json(eventos)   
 }
