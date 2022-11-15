@@ -1,16 +1,14 @@
 import { Layout } from "../../components/ui";
-import { TicketCard } from "../../components/eventos/";
 import { dbEventos } from "../../database/index";
+import { formatFecha } from "../../utils/helpers";
 
 import styled from "styled-components";
 import { Box, Container, Text } from "@chakra-ui/react";
 import { IoLocationOutline } from "react-icons/io5";
-import { formatFecha } from "../../utils/helpers";
 
 const PageEvento = ({ evento }) => {
     const { categoria, descripcion, fecha_evento, hora_evento, imagen_evento, modalidad, titulo, user:usuario, ticket, Localizacion:localizacion, direccion } = evento
     
-    console.log(evento);
     return (
         <Layout title={titulo}>
             <Section>
@@ -34,24 +32,20 @@ const PageEvento = ({ evento }) => {
                     `}</style>
 
                     <div className="portada">
-                            <Box mb='3rem' >
-                                <Text textStyle='h1' mb={5}>{`${titulo}`}</Text>
-                                <Text textStyle='p1' color='white.200' fontWeight={500}>Por: {`${usuario.name}`}</Text>
-                            </Box>
-                            
-                            <Box mb={4}>
-                                <Text maxW='550px' mb={4} fontSize='1.1rem'>{direccion}</Text>
-                                <Text display='flex' alignItems='center' gap={3} fontSize='1.1rem' fontWeight='700'> <IoLocationOutline/>{`${localizacion}`} </Text>
-                            </Box>
-
+                        <Box mb='3rem' >
+                            <Text textStyle='h1' mb={5}>{`${titulo}`}</Text>
+                            <Text textStyle='p1' color='white.200' fontWeight={500}>Por: {`${usuario.name}`}</Text>
+                        </Box>
                         
+                        <Box mb={4}>
+                            <Text maxW='550px' mb={4} fontSize='1.1rem'>{direccion}</Text>
+                            <Text display='flex' alignItems='center' gap={3} fontSize='1.1rem' fontWeight='700'> <IoLocationOutline/>{`${localizacion}`} </Text>
+                        </Box>
                     </div>
                 </Container>
                 
                 <Container maxW='container.lg' mt='3rem' display='flex' flexDirection={{base:'column',md:'row'}} gap={9}>
-
                     <Box>
-
                         <Box>
                             <Text textStyle='h2' mb={5}>Descripcion</Text>
                             <Text lineHeight={1.75}>
@@ -68,25 +62,37 @@ const PageEvento = ({ evento }) => {
                                 Hora: {`${hora_evento}`}
                             </Text>
                         </Box>
-                    
                     </Box>
 
                     <Box minW='250px'>
                         <Text textStyle='h3' mb={3}>Localizacion del Evento</Text>
                         <Text display='flex' mb={3} alignItems='center' gap={3} fontSize='1.1rem' fontWeight='400'> <IoLocationOutline/>{`${localizacion}`} </Text>
                         <Text fontSize='1.1rem' fontWeight='400'>{direccion}</Text>
-
-
                     </Box>
                 </Container>
-
             </Section>
         </Layout>
     )
 }
 
 
-export async function getServerSideProps({params}) {
+export const getStaticPaths = async (ctx) => {
+
+    const eventoSlug = await dbEventos.getAllSlugEvents();
+
+    return{
+        paths: eventoSlug.map( ({slug}) => ({
+            params:{
+                slug
+            }
+        })),
+        fallback: 'blocking'
+    }
+}
+
+
+
+export const getStaticProps = async ({params}) => {
     const {slug} = params
 
     const evento = await dbEventos.getEventBySlug( slug )
@@ -104,6 +110,7 @@ export async function getServerSideProps({params}) {
         props: {
             evento
         },
+        revalidate: 300
     }
 }
 
