@@ -18,3 +18,9 @@ export const getEventBySlug = async ( slug ) => {
     return JSON.parse( JSON.stringify( evento ) );
 
 }
+
+
+export const getAllSlugEvents = async () => {
+    const [slugs] = await db.query('SELECT slug from v_data_evento');
+    return slugs;
+}
