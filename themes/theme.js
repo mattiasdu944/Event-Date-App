@@ -33,19 +33,25 @@ export const theme = extendTheme({
   textStyles: {
     h1: {
       // you can also use responsive styles
-      fontSize: ['48px', '4rem'],
+      fontSize: ['40px', '4rem'],
       fontWeight: 'bold',
       lineHeight: '110%',
       letterSpacing: '-2%',
     },
     h2: {
-      fontSize: ['36px', '3rem'],
+      fontSize: ['30px', '3rem'],
       fontWeight: 'semibold',
       lineHeight: '110%',
       letterSpacing: '-1%',
     },
     h3: {
       fontSize: ['26px', '2rem'],
+      fontWeight: 'semibold',
+      lineHeight: '110%',
+      letterSpacing: '-1%',
+    },
+    p1: {
+      fontSize: ['20px', '1.25rem'],
       fontWeight: 'semibold',
       lineHeight: '110%',
       letterSpacing: '-1%',
