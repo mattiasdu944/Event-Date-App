@@ -12,6 +12,8 @@ const HomePage = () => {
 
   const {eventos, isLoading } = useEvento();
 
+  console.log(eventos)
+
   return (
     <Layout title='Inicio' description='Ultimas noticias y novedades de eventos'>
       <Section>

@@ -40,13 +40,13 @@ export const theme = extendTheme({
     },
     h2: {
       fontSize: ['30px', '3rem'],
-      fontWeight: 'semibold',
+      fontWeight: '800',
       lineHeight: '110%',
       letterSpacing: '-1%',
     },
     h3: {
       fontSize: ['26px', '2rem'],
-      fontWeight: 'semibold',
+      fontWeight: '700',
       lineHeight: '110%',
       letterSpacing: '-1%',
     },

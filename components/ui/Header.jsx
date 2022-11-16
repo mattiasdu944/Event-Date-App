@@ -13,7 +13,7 @@ export const Header = () => {
                 <Container maxW='container.lg' py={3}>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <Text 
-                            display={{ base: 'none', md: 'block'}}
+                            // display={{ base: 'none', md: 'block'}}
                             fontWeight={800}   
                             bgGradient='linear(to-l,  orange.500, orange.200)'
                             bgClip='text'
@@ -21,7 +21,7 @@ export const Header = () => {
                         >
                             Event Date
                         </Text>
-                        <InputGroup width='-webkit-max-content'>
+                        {/* <InputGroup width='-webkit-max-content'>
                             <Input
                                 type="text"
                                 placeholder="Realiza una busqueda"
@@ -30,24 +30,27 @@ export const Header = () => {
                                 _hover={{ focusBorderColor: 'orange.200' }}
                                 width='-webkit-max-content'
                             />
-                        </InputGroup>
-                        <List display={{ base: 'none', md: 'block'}}>
-                            <Flex gap={5}>
-                                {nav_links.map(enlace => 
-                                    <ListItem key={enlace.path}>
-                                        <Link href={enlace.path}>
-                                            <a >{enlace.name}</a>
-                                        </Link>
-                                    </ListItem>
-                                )}
-                            </Flex>
-                        </List>
+                        </InputGroup> */}
+                        <Box display='flex' alignItems='center' gap={10}>
 
-                        <Flex display={{ base: 'none', md: 'block'}} gap={5} >
-                            <NavAvatar/>
-                        </Flex>
-                        <Box display={{ md: 'none'}}>
-                            <DrawerMenu/>
+                            <List display={{ base: 'none', md: 'block'}}>
+                                <Flex gap={5}>
+                                    {nav_links.map(enlace => 
+                                        <ListItem key={enlace.path}>
+                                            <Link href={enlace.path}>
+                                                <a >{enlace.name}</a>
+                                            </Link>
+                                        </ListItem>
+                                    )}
+                                </Flex>
+                            </List>
+
+                            <Flex display={{ base: 'none', md: 'block'}} gap={5} >
+                                <NavAvatar/>
+                            </Flex>
+                            <Box display={{ md: 'none'}}>
+                                <DrawerMenu/>
+                            </Box>
                         </Box>
                     </Flex>
                 </Container>

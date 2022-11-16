@@ -23,12 +23,8 @@ export const nav_links = [
         path: '/',
     },
     {
-        name: 'Seguidos',
-        path: '#seguidos',
-    },
-    {
-        name: 'Favoritos',
-        path: '#favoritos',
+        name: 'Eventos',
+        path: '/eventos',
     },
     {
         name: 'Crear evento',

@@ -14,13 +14,19 @@ export const Evento = ({ evento }) => {
                 </div>
                 <Box display='flex' height='100%' gap='2rem' flexDirection='column' p={4}>
                     <Box>
-                        <Text textStyle='h3'>{evento.titulo}</Text>
+                        <Text textStyle='h3' mb={3} fontWeight='800'>{evento.titulo}</Text>
                         <Text width={{ md: '75%' }} noOfLines={2} >{evento.descripcion}</Text>
-                        <Text display='flex' alignItems='center' gap={1} color='orange.200' fontWeight={700}> <BiMap /> {evento.localizacion_evento}</Text>
+                        {/* <Text display='flex' alignItems='center' gap={1} color='orange.200' fontWeight={700}> <BiMap /> {evento.Localizacion}</Text> */}
                     </Box>
                     <Box display='flex' gap='2rem'>
-                        <Text display='flex' alignItems='center' gap={1}><BiCalendar /> {evento.fecha_evento}</Text>
-                        <Text display='flex' alignItems='center' gap={1}><BiTime /> {evento.hora_evento}</Text>
+                        <Text display='flex' alignItems='center' gap={1}>
+                            <BiCalendar color='#FC382E'/> 
+                            {evento.fecha_evento}
+                        </Text>
+                        <Text display='flex' alignItems='center' gap={1}>
+                            <BiTime color='#FC382E'/> 
+                            {evento.hora_evento}
+                        </Text>
                     </Box>
                 </Box>
             </Card>

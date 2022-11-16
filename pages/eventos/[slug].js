@@ -5,10 +5,12 @@ import { formatFecha } from "../../utils/helpers";
 import styled from "styled-components";
 import { Box, Container, Text } from "@chakra-ui/react";
 import { IoLocationOutline } from "react-icons/io5";
+import Image from "next/image";
+import { TicketCard } from "../../components/eventos/TicketCard";
 
 const PageEvento = ({ evento }) => {
     const { categoria, descripcion, fecha_evento, hora_evento, imagen_evento, modalidad, titulo, user:usuario, ticket, Localizacion:localizacion, direccion } = evento
-    
+    console.log(usuario)
     return (
         <Layout title={titulo}>
             <Section>
@@ -46,14 +48,21 @@ const PageEvento = ({ evento }) => {
                 
                 <Container maxW='container.lg' mt='3rem' display='flex' flexDirection={{base:'column',md:'row'}} gap={9}>
                     <Box>
-                        <Box>
+                        <Box display='flex' mb={5} alignItems='center' gap={5}>
+                            <Avatar src={usuario.image} alt={usuario.name}/>
+                            <Box>
+                                <Text textStyle='h3'>{usuario.name}</Text>
+                                <Text>{usuario.email}</Text>
+                            </Box>
+                        </Box>
+                        <Box mb='2rem'>
                             <Text textStyle='h2' mb={5}>Descripcion</Text>
                             <Text lineHeight={1.75}>
                                 {descripcion}
                             </Text>
                         </Box>
 
-                        <Box my='4rem'>
+                        <Box>
                             <Text textStyle='h3' mb={3}>Fecha y Hora</Text>
                             <Text lineHeight={1.75} fontSize='1.15rem'>
                                 Fecha: {formatFecha(fecha_evento)}
@@ -64,10 +73,23 @@ const PageEvento = ({ evento }) => {
                         </Box>
                     </Box>
 
-                    <Box minW='250px'>
-                        <Text textStyle='h3' mb={3}>Localizacion del Evento</Text>
-                        <Text display='flex' mb={3} alignItems='center' gap={3} fontSize='1.1rem' fontWeight='400'> <IoLocationOutline/>{`${localizacion}`} </Text>
-                        <Text fontSize='1.1rem' fontWeight='400'>{direccion}</Text>
+                    <Box minW='250px' display='flex' flexDirection='column' gap={5}>
+                        <Box>
+                            <Text textStyle='h3' mb={3}>Localizacion del Evento</Text>
+                            <Text display='flex' mb={3} alignItems='center' gap={3} fontSize='1.1rem' fontWeight='400'> <IoLocationOutline/>{`${localizacion}`} </Text>
+                            <Text fontSize='1.1rem' fontWeight='400'>{direccion}</Text>
+                        </Box>
+                        <Box>
+                            
+                            <Text textStyle='h3' mb={3}>Tickets</Text>
+                            {ticket.map( (ticket, index) => 
+                                <TicketCard
+                                    key={index}
+                                    ticket={ticket}	
+                                />
+                            )}
+                        </Box>
+                        
                     </Box>
                 </Container>
             </Section>
@@ -110,7 +132,7 @@ export const getStaticProps = async ({params}) => {
         props: {
             evento
         },
-        revalidate: 300
+        revalidate: 3600
     }
 }
 
@@ -125,6 +147,9 @@ const Section = styled.section`
   min-height: 100vh;
 `
 
-
+const Avatar = styled.img`
+    border-radius: 100%;
+    width: 50px;
+`
 
 export default PageEvento
