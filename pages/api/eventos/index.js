@@ -14,10 +14,7 @@ export default async function handler(req, res){
 //VER TODOS LOS EVENTOS CON Y SIN CATEGORIA EN LAS CARDS DEL FRONTEND
 const getAllEvents = async (req, res) => {
 
-    // console.log(req.body)
     const { category, titulo } = req.query;
-
-    console.log(titulo)
 
     if( category ){
         const [eventos] = await db.query('SELECT * from v_evento_categoria WHERE categoria = ?', category) 
