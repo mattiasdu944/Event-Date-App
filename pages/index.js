@@ -1,9 +1,7 @@
+import { Layout } from '../components/ui/Layout'
 import { useEvento } from '../hooks'
 import { getSession } from "next-auth/react"
-import { Layout } from '../components/ui/Layout'
-import { ListadoEventos } from '../components/index'
-import { Spinner } from '../components/ui'
-
+import { ListadoEventos, Spinner } from '../components/ui'
 
 import styled from "styled-components"
 import { Box, Container, Text } from "@chakra-ui/react"
@@ -11,8 +9,6 @@ import { Box, Container, Text } from "@chakra-ui/react"
 const HomePage = () => {
 
   const {eventos, isLoading } = useEvento();
-
-  console.log(eventos)
 
   return (
     <Layout title='Inicio' description='Ultimas noticias y novedades de eventos'>

@@ -1,16 +1,15 @@
 import { Layout } from "../../components/ui";
+import { TicketCard } from "../../components/eventos/TicketCard";
 import { dbEventos } from "../../database/index";
 import { formatFecha } from "../../utils/helpers";
 
 import styled from "styled-components";
 import { Box, Container, Text } from "@chakra-ui/react";
 import { IoLocationOutline } from "react-icons/io5";
-import Image from "next/image";
-import { TicketCard } from "../../components/eventos/TicketCard";
 
 const PageEvento = ({ evento }) => {
     const { categoria, descripcion, fecha_evento, hora_evento, imagen_evento, modalidad, titulo, user:usuario, ticket, Localizacion:localizacion, direccion } = evento
-    console.log(usuario)
+    
     return (
         <Layout title={titulo}>
             <Section>

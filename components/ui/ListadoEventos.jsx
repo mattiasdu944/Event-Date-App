@@ -1,16 +1,16 @@
-import { Text } from '@chakra-ui/react';
-import Link from 'next/link';
-import styled from 'styled-components'
 import { Evento } from '../ui';
 
+import styled from 'styled-components'
+import { Box, Text } from '@chakra-ui/react';
+
 export const ListadoEventos = ({eventos}) => {
-    console.log(eventos);
+    
+    if(eventos.length === 0){
+        return <Text>No se encontraron eventos</Text>
+    }
 
     return (
-        <>
-            <Link href='/eventos'>
-                <a cursor='pointer' color='orange.200' fontWeight={600}>Ver todos los eventos</a>
-            </Link>
+        <Box>
             <Listado>
                 {eventos.map((evento) => 
                     <Evento
@@ -20,7 +20,7 @@ export const ListadoEventos = ({eventos}) => {
                     )}
 
             </Listado>
-        </>
+        </Box>
     )
 }
 

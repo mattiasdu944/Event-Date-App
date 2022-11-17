@@ -1,29 +1,41 @@
-import { Button, Container, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
-import React from 'react'
-import styled from 'styled-components'
-import { Layout } from '../../components/ui'
+import { useState } from 'react';
+import { useEvento } from '../../hooks';
+import { Layout, Spinner } from '../../components/ui'
+import { BarCategorias, Buscador, Listado } from '../../components/eventos';
+import { dbCategorias } from "../../database/index";
 
-const Eventos = () => {
+import styled from 'styled-components'
+import { Box, Container } from '@chakra-ui/react'
+
+const Eventos = ({ categorias }) => {
+
+  const [param, setParam] = useState('')
+  const { eventos, isLoading } = useEvento(`${param}`);
+
   return (
     <Layout title={'Eventos'} description={'Encuentra todos los eventos mas cercanos'}>
       <Section>
         <Container maxW='container.lg'>
-          <InputGroup size='md'>
-          <Input
-              pr="4.5rem"
-              type='text'
-              placeholder="Buscar Evento"
-              borderColor="whiteAlpha.300"
-              focusBorderColor="orange.500"
-              _hover={{ outline: "orange.200" }}
-              
+
+          <Buscador 
+            setParam={setParam}
+          />
+
+          <Box display='flex' gap={5}>
+            <BarCategorias
+              categorias={categorias}
+              setParam={setParam}
             />
-            <InputRightElement width='4.5rem'>
-                <Button>
-                  Buscar
-                </Button>
-            </InputRightElement>
-          </InputGroup>
+
+            {
+              isLoading
+                ? <Box minH='80vh' display='flex' alignItems='center'> <Spinner /> </Box>
+                : <Listado eventos={eventos}/>
+            }
+
+          </Box>
+
+
         </Container>
       </Section>
     </Layout>
@@ -40,5 +52,15 @@ const Section = styled.section`
   background-size: cover;
   min-height: 100vh;
 `
+
+export async function getStaticProps(ctx) {
+  const categorias = await dbCategorias.getAllCategories();
+
+  return {
+    props: { categorias }
+  }
+
+}
+
 
 export default Eventos
