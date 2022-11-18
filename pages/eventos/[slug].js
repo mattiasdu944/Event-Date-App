@@ -88,30 +88,12 @@ const PageEvento = ({ evento }) => {
                                 />
                             )}
                         </Box>
-                        
                     </Box>
                 </Container>
             </Section>
         </Layout>
     )
 }
-
-
-export const getStaticPaths = async (ctx) => {
-
-    const eventoSlug = await dbEventos.getAllSlugEvents();
-
-    return{
-        paths: eventoSlug.map( ({slug}) => ({
-            params:{
-                slug
-            }
-        })),
-        fallback: 'blocking'
-    }
-}
-
-
 
 export const getStaticProps = async ({params}) => {
     const {slug} = params
@@ -131,9 +113,25 @@ export const getStaticProps = async ({params}) => {
         props: {
             evento
         },
-        revalidate: 3600
+        revalidate: 1800
     }
 }
+
+
+export const getStaticPaths = async (ctx) => {
+
+    const eventoSlug = await dbEventos.getAllSlugEvents();
+
+    return{
+        paths: eventoSlug.map( ({slug}) => ({
+            params:{
+                slug
+            }
+        })),
+        fallback: 'blocking'
+    }
+}
+
 
 
 const Section = styled.section`
