@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={{
       signInWithCredentials,
       signInWithGoogle,
-      errorUserDb,
+      // errorUserDb,
       user,
     }}>
       {children}
