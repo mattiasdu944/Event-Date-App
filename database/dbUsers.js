@@ -5,7 +5,6 @@ export const checkEmailPassword = async( names, mail, password, tipo) => {
     const [[user]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", mail);
 
     if( tipo === "login"){
-        console.log(user)
         if(!user){
             console.error('No existe el usuario')
             return null;
