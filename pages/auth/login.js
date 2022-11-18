@@ -1,24 +1,11 @@
 import Head from "next/head";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
-import { useAuth } from "../../hooks/useAuth";
 import { FormLogin } from "../../components/login";
 
 import { Container, Text } from "@chakra-ui/react";
 import styled from "styled-components";
 
 const Login = () => {
-  const { errorUserDb } = useAuth();
-  const router = useRouter();
-  useEffect(() => {
-      
-    if(router.query.error){
-      errorUserDb(router.pathname);
-    }
-   
-  }, [])
-
   
   return (
     <>
