@@ -17,9 +17,7 @@ const Eventos = ({ categorias }) => {
       <Section>
         <Container maxW='container.lg'>
 
-          <Buscador 
-            setParam={setParam}
-          />
+          <Buscador/>
 
           <Box display='flex' gap={5}>
             <BarCategorias

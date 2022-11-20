@@ -17,12 +17,12 @@ const getAllEvents = async (req, res) => {
     const { category, titulo } = req.query;
 
     if( category ){
-        const [eventos] = await db.query('SELECT * from v_evento_categoria WHERE categoria = ?', category) 
+        const [eventos] = await db.query('SELECT * from v_evento_categoria WHERE categoria = ? ORDER BY id DESC', category) 
         return res.status(200).json(eventos)     
     }
 
     if( titulo ){
-        const [eventos] = await db.query(`SELECT * from v_evento_categoria WHERE titulo LIKE ?`, [`%${titulo}%`]) 
+        const [eventos] = await db.query(`SELECT * from v_evento_categoria WHERE titulo LIKE ? ORDER BY id DESC`, [`%${titulo}%`]) 
         return res.status(200).json(eventos)     
     }
 

@@ -1,15 +1,20 @@
-import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
-import React from 'react'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
-export const Buscador = ({setParam}) => {
+import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 
+export const Buscador = () => {
+    const router = useRouter();
     const [buscador, setBuscador] = useState('')
-    
    
     const handleSearch = e => {
         e.preventDefault();
-        setParam(`?titulo=${buscador}`)
+
+        if(buscador.trim() === ''){
+            return;
+        }
+
+        router.push(`/search/${buscador}`)
     }
 
     return (

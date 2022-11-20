@@ -49,7 +49,7 @@ const PageEvento = ({ evento }) => {
                 <Container maxW='container.lg' mt='3rem' display='flex' flexDirection={{base:'column',md:'row'}} gap={9}>
                     <Box>
                         <Link href={`/profile/${usuario.email}`}>
-                            <Box display='flex' mb={5} alignItems='center' gap={5}>
+                            <Box display='flex' cursor='pointer' mb={5} alignItems='center' gap={5}>
                                 <Avatar src={usuario.image} alt={usuario.name}/>
                                 <Box>
                                     <Text textStyle='h3'>{usuario.name}</Text>
