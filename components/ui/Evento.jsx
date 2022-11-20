@@ -4,6 +4,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { Box, Text } from '@chakra-ui/react'
 import { BiCalendar, BiMap, BiTime } from 'react-icons/bi'
+import { formatFecha } from '../../utils/helpers'
 
 export const Evento = ({ evento }) => {
     return (
@@ -21,7 +22,7 @@ export const Evento = ({ evento }) => {
                     <Box display='flex' gap='2rem'>
                         <Text display='flex' alignItems='center' gap={1}>
                             <BiCalendar color='#FC382E'/> 
-                            {evento.fecha_evento}
+                            {formatFecha( evento.fecha_evento)}
                         </Text>
                         <Text display='flex' alignItems='center' gap={1}>
                             <BiTime color='#FC382E'/> 

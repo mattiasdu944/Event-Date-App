@@ -1,6 +1,24 @@
 import { db } from "./db"
 import bcrypt from 'bcrypt'
 
+
+export const getDataUser = async (id) => {
+    let [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE id = ?", id);
+    let [eventos] = await db.query("SELECT * FROM v_usuario_evento WHERE id = ? ORDER BY id DESC", id); 
+
+    if( !user ){
+        return null;
+    }
+
+    if(!eventos){
+        eventos = []
+    }
+    const usuario = {...user, eventos}
+
+    return usuario;
+}
+
+
 export const checkEmailPassword = async( names, mail, password, tipo) => {
     const [[user]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", mail);
 

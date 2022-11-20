@@ -2,7 +2,6 @@ import { Box, Text } from '@chakra-ui/react'
 import { formatFecha } from '../../utils/helpers';
 
 export const Banner = ({ evento }) => {
-    console.log(evento);
     const {titulo, imagen_evento, fecha_evento, hora_evento} = evento;
 
     return (

@@ -1,15 +1,12 @@
-import { useUser } from "../hooks";
-import { Layout, Spinner } from "../components/ui";
-import { Perfil, TabMenu } from "../components/profile";
+import { dbUsers } from "../../database";
+import { Layout } from "../../components/ui";
+import { Perfil, TabMenu } from "../../components/profile";
 
 import styled from "styled-components";
 import { Container } from "@chakra-ui/react";
+import { getSession } from "next-auth/react";
 
-
-
-
-const Profile = () => {
-  const { perfil, isLoading, error } = useUser();
+const Profile = ({ perfil }) => {
 
   return (
     <Layout
@@ -18,20 +15,12 @@ const Profile = () => {
     >
       <Section>
         <Container maxW='container.md'>
-          {
-            isLoading
-              ?
-              <Spinner />
-              :
-              <>
-                <Perfil
-                  perfil={perfil}
-                />
-                <TabMenu
-                  perfil={perfil}
-                />
-              </>
-          }
+          <Perfil
+            perfil={perfil}
+          />
+          <TabMenu
+            perfil={perfil}
+          />
 
         </Container>
       </Section>
@@ -41,6 +30,17 @@ const Profile = () => {
 }
 
 export default Profile
+
+export async function getServerSideProps(ctx) {
+  const { user } = await getSession(ctx)
+  const perfil = await dbUsers.getDataUser(user.id)
+  return {
+    props: {
+      perfil
+    }
+  }
+}
+
 
 const Section = styled.section`
   flex-direction: column;
