@@ -1,9 +1,9 @@
+import Link from 'next/link';
 import { nav_links } from '../../constants';
 import { DrawerMenu, NavAvatar } from './';
 
-import { Box, Container, Flex, Input, InputGroup, List, ListItem, Text } from '@chakra-ui/react'
+import { Box, Container, Flex, List, ListItem, Text } from '@chakra-ui/react'
 import styled from 'styled-components';
-import Link from 'next/link';
 
 export const Header = () => {
   return (
@@ -13,7 +13,6 @@ export const Header = () => {
                 <Container maxW='container.lg' py={3}>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <Text 
-                            // display={{ base: 'none', md: 'block'}}
                             fontWeight={800}   
                             bgGradient='linear(to-l,  orange.500, orange.200)'
                             bgClip='text'
@@ -21,16 +20,6 @@ export const Header = () => {
                         >
                             Event Date
                         </Text>
-                        {/* <InputGroup width='-webkit-max-content'>
-                            <Input
-                                type="text"
-                                placeholder="Realiza una busqueda"
-                                borderColor='whiteAlpha.300'
-                                focusBorderColor="orange.500"
-                                _hover={{ focusBorderColor: 'orange.200' }}
-                                width='-webkit-max-content'
-                            />
-                        </InputGroup> */}
                         <Box display='flex' alignItems='center' gap={10}>
 
                             <List display={{ base: 'none', md: 'block'}}>
