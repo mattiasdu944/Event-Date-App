@@ -1,7 +1,10 @@
+export * from './Banner'
 export * from './DrawerMenu'
 export * from './Evento'
+export * from './Footer'
 export * from './Header'
 export * from './Layout'
 export * from './NavAvatar'
 export * from './Spinner'
 export * from './ListadoEventos'
+
