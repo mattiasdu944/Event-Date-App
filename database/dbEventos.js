@@ -1,6 +1,12 @@
 import { db } from "./db"
 
 
+export const getAllEvents = async () => {
+    const [eventos] = await db.query('SELECT * from v_evento_categoria ORDER BY id DESC;') 
+
+    return eventos
+}
+
 export const getEventBySlug = async ( slug ) => {
 
     const [[data]] = await db.query('SELECT * from v_data_evento WHERE slug = ?', slug) 
