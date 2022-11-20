@@ -1,44 +1,34 @@
+import Link from "next/link";
+import { dbEventos } from "../database/index";
 import { Layout } from '../components/ui/Layout'
-import { useEvento } from '../hooks'
-import { getSession } from "next-auth/react"
-import { ListadoEventos, Spinner } from '../components/ui'
+import { Banner, ListadoEventos } from '../components/ui'
 
 import styled from "styled-components"
 import { Box, Container, Text } from "@chakra-ui/react"
 
-const HomePage = () => {
 
-  const {eventos, isLoading } = useEvento();
+const HomePage = ({ eventos }) => {
 
   return (
     <Layout title='Inicio' description='Ultimas noticias y novedades de eventos'>
       <Section>
+        <Container maxW='container.xl'>
+          <Banner evento={eventos[0]}/>
+        </Container>
         <Container maxW='container.lg'>
           <Box>
-            <Text textStyle='h2' mb={5} fontWeight={700}>
-              Ultimos Eventos
-            </Text>
-
-            {
-              isLoading
-              ? <Box minH='100vh'> <Spinner/> </Box>
-              : <ListadoEventos eventos={ eventos } />
-            }
-            
+            <Box mb={10} display='flex' alignItems='center' justifyContent='space-between'>
+              <Text textStyle='h2'  fontWeight={700}>
+                Proximos Eventos
+              </Text>
+              <Box backgroundColor='#00000090' padding='.75rem' borderRadius='.5rem'>
+                <Link href='/eventos'>
+                  <a>Ver todos los eventos</a>
+                </Link>
+              </Box>
+            </Box>
+            <ListadoEventos eventos={eventos} />
           </Box>
-
-          <Box>
-            <Text fontWeight={700} fontSize={{ base: '24px', md: '40px', lg: '56px' }}>
-              Ultimos Eventos
-            </Text>
-          </Box>
-
-          <Box>
-            <Text fontWeight={700} fontSize={{ base: '24px', md: '40px', lg: '56px' }}>
-              Ultimos Eventos
-            </Text>
-          </Box>
-
 
         </Container>
       </Section>
@@ -48,8 +38,19 @@ const HomePage = () => {
 
 export default HomePage
 
+
+export async function getStaticProps(ctx){
+  const eventos = await dbEventos.getAllEvents();
+
+  return {
+       props: {eventos},
+       revalidate: 43200
+  }
+}
+
+
 const Section = styled.section`
-  padding: 5rem 1rem 0;
+  padding: 5rem  0;
   background-image: linear-gradient(to right, rgb( 0 0 0 / .6), rgb(0 0 0 / .8)), url("https://images.pexels.com/photos/7130475/pexels-photo-7130475.jpeg?auto=compress&cs=tinysrgb&w=1600");
   background-repeat: no-repeat;
   background-position: center;
@@ -57,18 +58,5 @@ const Section = styled.section`
   min-height: 100vh;
 `
 
-export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/auth/login',
-      },
-    }
-  }
 
-  return {
-    props: { session },
-  }
-}
