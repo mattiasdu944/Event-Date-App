@@ -1,7 +1,8 @@
+import { useState } from "react"
+
 import Head from "next/head"
 import { useSession } from "next-auth/react"
-import { Header, Spinner } from "./"
-import { useState } from "react"
+import { Header, Footer } from "./"
 
 export const Layout = ({ title, description, children }) => {
   const [loading, setLoading] = useState(true)
@@ -23,8 +24,7 @@ export const Layout = ({ title, description, children }) => {
       <main>
         {children}
       </main>
-
-
+      <Footer/>
     </>
   )
 }
