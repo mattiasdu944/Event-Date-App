@@ -32,7 +32,7 @@ export const Buscador = () => {
                     onChange={e =>  setBuscador(e.target.value)}
                 />
                 <InputRightElement width='4.5rem'>
-                    <Button onClick={handleSearch}>
+                    <Button onClick={handleSearch} bgColor='#ffffff2b' _hover={{bgColor:'#ffffff2b'}} _active={{bgColor:'transparent'}}>
                         Buscar
                     </Button>
                 </InputRightElement>

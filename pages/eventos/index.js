@@ -1,37 +1,34 @@
 import { useState } from 'react';
 import { useEvento } from '../../hooks';
 import { Layout, Spinner } from '../../components/ui'
-import { BarCategorias, Buscador, Listado } from '../../components/eventos';
+import { BarCategorias, Buscador, Listado, SelectCategorias } from '../../components/eventos';
 import { dbCategorias } from "../../database/index";
 
 import styled from 'styled-components'
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Container, Select } from '@chakra-ui/react'
 
 const Eventos = ({ categorias }) => {
 
   const [param, setParam] = useState('')
-  const { eventos, isLoading } = useEvento(`${param}`);
+  const { eventos, isLoading } = useEvento(`?category=${param}`);
 
   return (
     <Layout title={'Eventos'} description={'Encuentra todos los eventos mas cercanos'}>
       <Section>
         <Container maxW='container.lg'>
-
-          <Buscador/>
-
-          <Box display='flex' gap={5}>
-            <BarCategorias
+            <Buscador/>
+            <SelectCategorias
               categorias={categorias}
               setParam={setParam}
+              param={param}
             />
 
             {
               isLoading
-                ? <Box minH='80vh' display='flex' alignItems='center'> <Spinner /> </Box>
+                ? <Box minH='80vh' w='100%' display='flex' alignItems='center'> <Spinner /> </Box>
                 : <Listado eventos={eventos}/>
             }
 
-          </Box>
 
 
         </Container>
