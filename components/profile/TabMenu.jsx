@@ -1,7 +1,7 @@
-import { Evento, Spinner } from '../ui'
+import { Evento } from '../ui'
 
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Text } from '@chakra-ui/react'
 import styled from 'styled-components'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Text } from '@chakra-ui/react'
 
 export const TabMenu = ({perfil}) => {
     const { eventos } = perfil
@@ -19,7 +19,7 @@ export const TabMenu = ({perfil}) => {
                         <Listado>
                             {eventos.map(evento => 
                                 <Evento
-                                    key={evento.id}
+                                    key={evento.slug}
                                     evento={evento}
                                 />       
                             )}
