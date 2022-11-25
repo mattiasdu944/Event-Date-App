@@ -34,6 +34,7 @@ export default Profile
 export async function getServerSideProps(ctx) {
   const { user } = await getSession(ctx)
   const perfil = await dbUsers.getDataUser(user.id)
+
   return {
     props: {
       perfil

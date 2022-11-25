@@ -1,4 +1,5 @@
 export * from './Banner'
+export * from './CardUsuario'
 export * from './DrawerMenu'
 export * from './Evento'
 export * from './Footer'

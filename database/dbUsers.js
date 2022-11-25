@@ -5,15 +5,22 @@ import bcrypt from 'bcrypt'
 export const getDataUser = async (id) => {
     let [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE id = ?", id);
     let [eventos] = await db.query("SELECT * FROM v_usuario_evento WHERE id = ? ORDER BY id DESC", id); 
+    let [seguidores] = await db.query("SELECT * FROM v_usuario_seguidores WHERE seguido = ?", id);
+    let [seguidos] = await db.query("SELECT * FROM v_usuario_seguidos WHERE seguidor = ?", id);
+
+    if( !seguidores )   { seguidores = null }
+    if( !seguidos )     { seguidos = null }
+
 
     if( !user ){
-        return null;
+        return null;    
     }
 
     if(!eventos){
         eventos = []
     }
-    const usuario = {...user, eventos}
+    const usuario = {...user, eventos, seguidores, seguidos}
+
 
     return usuario;
 }

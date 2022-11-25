@@ -16,6 +16,10 @@ const  getUserById = async (req,res) => {
     
     let [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE id = ?", id);
     let [eventos] = await db.query("SELECT * FROM v_usuario_evento WHERE id = ?", id); 
+
+    let [seguidores] = await db.query("SELECT * FROM v_usuario_seguidores WHERE seguido = ?", id);
+    let [seguidos] = await db.query("SELECT * FROM v_usuario_seguidos WHERE seguidor = ?", id);
+
     if( !user ){
         return res.status(200).json({});
     }
@@ -23,7 +27,11 @@ const  getUserById = async (req,res) => {
         eventos = null
     }
 
-    const usuario = {...user, eventos}
+    if( !seguidores )   { seguidores = null }
+
+    if( !seguidos )     { seguidos = null }
+
+    const usuario = {...user, eventos, seguidores, seguidos}
 
     res.status(200).json(usuario);
 }

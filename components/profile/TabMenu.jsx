@@ -1,10 +1,10 @@
-import { Evento } from '../ui'
+import { CardUsuario, Evento } from '../ui'
 
 import styled from 'styled-components'
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Text } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Text } from '@chakra-ui/react'
 
 export const TabMenu = ({perfil}) => {
-    const { eventos } = perfil
+    const { eventos, seguidores, seguidos } = perfil
     return (
         <>
             <Tabs colorScheme='orange.200' size={{base:'sm', md:'md'}} variant='enclosed' borderColor='gray.700'>
@@ -16,20 +16,41 @@ export const TabMenu = ({perfil}) => {
 
                 <TabPanels>
                     <TabPanel> 
-                        <Listado>
+                        <ListadoEventos>
                             {eventos.map(evento => 
                                 <Evento
                                     key={evento.slug}
                                     evento={evento}
                                 />       
                             )}
-                        </Listado>
+                        </ListadoEventos>
                     </TabPanel>
                     <TabPanel>
-                        <p>two!</p>
+                        <Text textStyle='h3' mb={5}>Compartes Gustos con:</Text>
+                        <ListadoSeguidores>
+                            {
+                                seguidores.map(usuario => 
+                                    <CardUsuario
+                                        key={usuario.email}
+                                        usuario={usuario}
+                                    />
+                                )
+                            }
+                        </ListadoSeguidores>
+
                     </TabPanel>
                     <TabPanel>
-                        <p>three!</p>
+                        <Text textStyle='h3' mb={5}>Cuentas a las que sigues:</Text>
+                        <ListadoSeguidores>
+                            {
+                                seguidos.map(usuario => 
+                                    <CardUsuario
+                                        key={usuario.email}
+                                        usuario={usuario}
+                                    />
+                                )
+                            }
+                        </ListadoSeguidores>
                     </TabPanel>
                 </TabPanels>
             </Tabs>
@@ -38,8 +59,13 @@ export const TabMenu = ({perfil}) => {
 
 }
 
-const Listado = styled.div`
+const ListadoEventos = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
+`
+
+const ListadoSeguidores = styled.div`
+    display: grid;
+    gap: 1rem;
 `

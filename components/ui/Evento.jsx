@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import styled from 'styled-components'
 import { Box, Text } from '@chakra-ui/react'
-import { BiCalendar, BiMap, BiTime } from 'react-icons/bi'
+import { BiCalendar, BiTime } from 'react-icons/bi'
 import { formatFecha } from '../../utils/helpers'
 
 export const Evento = ({ evento }) => {
@@ -17,7 +17,6 @@ export const Evento = ({ evento }) => {
                     <Box>
                         <Text textStyle='h3' mb={3} fontWeight='800'>{evento.titulo}</Text>
                         <Text width={{ md: '75%' }} noOfLines={2} >{evento.descripcion}</Text>
-                        {/* <Text display='flex' alignItems='center' gap={1} color='orange.200' fontWeight={700}> <BiMap /> {evento.Localizacion}</Text> */}
                     </Box>
                     <Box display='flex' gap='2rem'>
                         <Text display='flex' alignItems='center' gap={1}>

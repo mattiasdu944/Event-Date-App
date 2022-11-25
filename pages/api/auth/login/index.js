@@ -48,7 +48,7 @@ const authenticateUser = async (req, res) => {
         const { name, email, password, image } = usuario;
         const passHashed = await bcrypt.hash(password,8);
         
-        await db.query('INSERT INTO usuarios (email, name, password, image) VALUES (?,?,?,?)', [email, name, passHashed,image ? image : ''])
+        await db.query('INSERT INTO usuarios (email, name, password, image) VALUES (?,?,?,?)', [email, name, passHashed, image ? image : ''])
 
         const [[newUser]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", email);
         
