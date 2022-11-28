@@ -1,7 +1,7 @@
 import React from 'react'
 
 const useFollows = () => {
-    const url = 'http://localhost:3000/api/followers'
+    const url = `${process.env.HOSTING}/api/followers`
 
     const addFollow = async ( data ) => {
         const response = await fetch( url ,{
@@ -14,7 +14,7 @@ const useFollows = () => {
     }
 
     const deleteFollow = async ( id ) => {
-        const response = await fetch( `http://localhost:3000/api/followers/${id}` ,{
+        const response = await fetch( `${url}/${id}` ,{
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

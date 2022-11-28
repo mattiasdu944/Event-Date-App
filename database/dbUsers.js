@@ -87,10 +87,6 @@ export const checkEmailPassword = async( names, mail, password, tipo) => {
 }
 
 
-export const deleteFollow = ( id ) => {
-    console.log(id)
-
-}
 
 export const oAuthToDbUser = async (oAuthEmail, oAuthName, oAuthImage ) => {
     const [[user]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", oAuthEmail);
