@@ -1,14 +1,50 @@
-import {
-    Avatar, Box, Button, Accordion,
-    AccordionItem,
-    AccordionButton,
-    AccordionPanel,
-    AccordionIcon, Text, WrapItem
-} from "@chakra-ui/react";
+import { useAuth } from "../../hooks";
+import { useRouter } from "next/router";
+import { ButtonFollow } from "../eventos";
+import { useEffect, useState } from "react";
+import useFollows from "../../hooks/useFollows";
+
 import { BiMap } from "react-icons/bi";
 import { BsTelephone } from "react-icons/bs";
+import { Avatar, Box, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Text, WrapItem} from "@chakra-ui/react";
+
 
 export const Perfil = ({ perfil }) => {
+    const router = useRouter();
+    const { user } = useAuth();
+    const [ addFollow, deleteFollow ] = useFollows();
+    const [isFollower, setIsFollower] = useState(false)
+
+    const verifyFollower = ( data ) => {
+        if ( data.email === user.email ) {
+            setIsFollower(true)
+            return data.id
+        } 
+    }
+
+    useEffect(() => {
+        setIsFollower(false)
+        perfil.seguidores.filter( verifyFollower )
+    }, [router.query])
+    
+
+    const handleFollow = async () => {
+        const followData = perfil.seguidores.filter(verifyFollower);
+
+        if( !isFollower ){
+            console.log('Agregando')
+            await addFollow({
+                seguido: perfil.id,
+                seguidor: user.id
+            });
+            setIsFollower(true)
+            return;
+        }
+        await deleteFollow(followData[0].id)
+        setIsFollower(false)
+    }
+    
+
     return (
         <>
             <Box display='flex' flexDirection='column' >
@@ -55,9 +91,16 @@ export const Perfil = ({ perfil }) => {
                                 {perfil.telefono && <><BsTelephone /> {perfil.telefono}</>}
                             </Text>
                         </Box>
-                        <Button color='orange.200' borderColor='orange.200' _hover={{bg:'transparent'}} _active={{bg:'transparent'}} mt={2} py={1} alignItems='center' variant='outline' width='100%'>
-                            Editar Perfil
-                        </Button>
+
+
+                        {
+                            perfil.id != user.id
+                            ?
+                                isFollower 
+                                ? <ButtonFollow title='Dejar de seguir' funcion={handleFollow}/>
+                                : <ButtonFollow title='Seguir' funcion={handleFollow}/>
+                            : <ButtonFollow title='Editar Perfil' funcion={handleFollow}/>
+                        }
                     </Box>
                 </Box>
             </Box>

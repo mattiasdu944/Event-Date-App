@@ -26,6 +26,26 @@ export const getDataUser = async (id) => {
 }
 
 
+export const getDataUserByEmail = async (email) => {
+    let [[user]] = await db.query("SELECT * FROM v_usuario_description WHERE email = ?", email);
+    let [eventos] = await db.query("SELECT * FROM v_usuario_evento WHERE id = ? ORDER BY id DESC", user.id); 
+    let [seguidores] = await db.query("SELECT * FROM v_usuario_seguidores WHERE seguido = ?", user.id);
+    let [seguidos] = await db.query("SELECT * FROM v_usuario_seguidos WHERE seguidor = ?", user.id);
+
+    if( !seguidores )   { seguidores = null }
+    if( !seguidos )     { seguidos = null }
+
+    if( !user ){
+        return null;    
+    }
+
+    if(!eventos){
+        eventos = []
+    }
+    const usuario = {...user, eventos, seguidores, seguidos}
+    return usuario;
+}
+
 export const checkEmailPassword = async( names, mail, password, tipo) => {
     const [[user]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", mail);
 
@@ -66,6 +86,11 @@ export const checkEmailPassword = async( names, mail, password, tipo) => {
     }
 }
 
+
+export const deleteFollow = ( id ) => {
+    console.log(id)
+
+}
 
 export const oAuthToDbUser = async (oAuthEmail, oAuthName, oAuthImage ) => {
     const [[user]] = await db.query("SELECT * FROM usuarios WHERE usuarios.email = ?", oAuthEmail);

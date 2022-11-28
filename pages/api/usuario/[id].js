@@ -5,6 +5,7 @@ export default async function handler(req, res){
     switch( req.method ){
         case 'GET':
             return getUserById(req, res) 
+        
         default:
             return res.status(400).json({message:'Bad request'})
     }

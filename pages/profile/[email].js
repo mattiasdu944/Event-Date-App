@@ -1,19 +1,44 @@
-import React from 'react'
-import styled from 'styled-components'
 import { Layout } from '../../components/ui'
+import { dbUsers } from "../../database";
 
-const PerfilUsuario = () => {
+import styled from 'styled-components'
+import { Perfil, TabMenu } from '../../components/profile';
+import { Container } from '@chakra-ui/react';
+
+
+const PerfilUsuario = ({ perfil }) => {
   return (
-    <Layout title='usuario' description='Visita a y encuentra sus eventos'>
+    <Layout title={perfil.name} description={perfil.description}>
       <Section>
+        <Container maxW='container.md'>
 
-        <div>PerfilUsuario</div>
+          <Perfil
+            perfil={perfil}
+          />
+
+          <TabMenu
+            perfil={perfil}
+          />
+
+        </Container>
       </Section>
     </Layout>
   )
 }
 
 export default PerfilUsuario
+
+
+export const getServerSideProps = async ({params}) => {
+  const {email} = params;
+  const perfil = await dbUsers.getDataUserByEmail(email);
+
+  return {
+    props:{
+      perfil
+    }
+  }
+}
 
 const Section = styled.section`
   flex-direction: column;
