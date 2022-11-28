@@ -1,7 +1,7 @@
 import React from 'react'
 
 const useFollows = () => {
-    const url = `${process.env.HOSTING}/api/followers`
+    const url = `${process.env.HOSTNAME}/api/followers`
 
     const addFollow = async ( data ) => {
         const response = await fetch( url ,{
