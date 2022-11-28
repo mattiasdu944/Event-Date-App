@@ -15,9 +15,11 @@ const Profile = ({ perfil }) => {
     >
       <Section>
         <Container maxW='container.md'>
+
           <Perfil
             perfil={perfil}
           />
+          
           <TabMenu
             perfil={perfil}
           />
