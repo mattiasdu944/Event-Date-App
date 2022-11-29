@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useEvento } from '../../hooks';
-import { Layout, Spinner } from '../../components/ui'
-import { BarCategorias, Buscador, Listado, SelectCategorias } from '../../components/eventos';
 import { dbCategorias } from "../../database/index";
+import { Layout, Spinner } from '../../components/ui'
 
 import styled from 'styled-components'
-import { Box, Container, Select } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
+import { Buscador, Listado, SelectCategorias } from '../../components/eventos';
+
 
 const Eventos = ({ categorias }) => {
 
@@ -28,15 +29,22 @@ const Eventos = ({ categorias }) => {
                 ? <Box minH='80vh' w='100%' display='flex' alignItems='center'> <Spinner /> </Box>
                 : <Listado eventos={eventos}/>
             }
-
-
-
         </Container>
       </Section>
     </Layout>
   )
 }
 
+
+
+export async function getStaticProps(ctx) {
+  const categorias = await dbCategorias.getAllCategories();
+
+  return {
+    props: { categorias }
+  }
+
+}
 
 const Section = styled.section`
   flex-direction: column;
@@ -47,15 +55,6 @@ const Section = styled.section`
   background-size: cover;
   min-height: 100vh;
 `
-
-export async function getStaticProps(ctx) {
-  const categorias = await dbCategorias.getAllCategories();
-
-  return {
-    props: { categorias }
-  }
-
-}
 
 
 export default Eventos

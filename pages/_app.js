@@ -1,8 +1,8 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { SessionProvider } from "next-auth/react";
 
-import { theme } from '../themes'
 import '../styles/globals.css'
+import { theme } from '../themes'
 import { AuthProvider } from '../context/AuthProvider';
 
 function MyApp({ Component, pageProps }) {

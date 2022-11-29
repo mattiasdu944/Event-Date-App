@@ -1,7 +1,5 @@
-import React from 'react'
-
 const useFollows = () => {
-    const url = `https://event-date-app.vercel.app/api/followers`
+    const url = `${process.env.NEXT_PUBLIC_HOSTNAME}/api/followers`
 
     const addFollow = async ( data ) => {
         const response = await fetch( url ,{
@@ -9,6 +7,7 @@ const useFollows = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            mode: 'cors',
             body: JSON.stringify(data)
         })
     }

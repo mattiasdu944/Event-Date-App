@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { dbEventos } from "../database/index";
-import { Layout } from '../components/ui/Layout'
-import { Banner, ListadoEventos } from '../components/ui'
+import { Banner, ListadoEventos,Layout } from '../components/ui'
 
 import styled from "styled-components"
 import { Box, Container, Text } from "@chakra-ui/react"

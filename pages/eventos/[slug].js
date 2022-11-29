@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Layout } from "../../components/ui";
 import { TicketCard } from "../../components/eventos/TicketCard";
 import { dbEventos } from "../../database/index";
@@ -6,10 +7,9 @@ import { formatFecha } from "../../utils/helpers";
 import styled from "styled-components";
 import { Box, Container, Text } from "@chakra-ui/react";
 import { IoLocationOutline } from "react-icons/io5";
-import Link from "next/link";
 
 const PageEvento = ({ evento }) => {
-    const { categoria, descripcion, fecha_evento, hora_evento, imagen_evento, modalidad, titulo, user:usuario, ticket, Localizacion:localizacion, direccion } = evento
+    const {  descripcion, fecha_evento, hora_evento, imagen_evento, modalidad, titulo, user:usuario, ticket, Localizacion:localizacion, direccion } = evento
     
     return (
         <Layout title={titulo}>
@@ -44,6 +44,7 @@ const PageEvento = ({ evento }) => {
                             <Text display='flex' alignItems='center' gap={3} fontSize='1.1rem' fontWeight='700'> <IoLocationOutline/>{`${localizacion}`} </Text>
                         </Box>
                     </div>
+                    
                 </Container>
                 
                 <Container maxW='container.lg' mt='3rem' display='flex' flexDirection={{base:'column',md:'row'}} gap={9}>

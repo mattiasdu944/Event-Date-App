@@ -1,5 +1,5 @@
-import { Layout, ListadoEventos } from '../../components/ui'
 import { Buscador } from '../../components/eventos'
+import { Layout, ListadoEventos } from '../../components/ui'
 
 import styled from 'styled-components'
 import { Container, Text } from '@chakra-ui/react'

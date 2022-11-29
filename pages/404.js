@@ -1,8 +1,8 @@
-import { Container, Text } from '@chakra-ui/react'
 import Link from 'next/link'
-import React from 'react'
-import styled from 'styled-components'
 import { Layout } from '../components/ui'
+
+import styled from 'styled-components'
+import { Container, Text } from '@chakra-ui/react'
 
 const NotFound = () => {
   return (
