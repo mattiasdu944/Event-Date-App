@@ -4,7 +4,7 @@ import { dbCategorias } from "../../database/index";
 import { Layout, Spinner } from '../../components/ui'
 
 import styled from 'styled-components'
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Container, Text } from '@chakra-ui/react'
 import { Buscador, Listado, SelectCategorias } from '../../components/eventos';
 
 
@@ -18,6 +18,8 @@ const Eventos = ({ categorias }) => {
       <Section>
         <Container maxW='container.lg'>
             <Buscador/>
+            <Text textStyle='h3' mb={5}>Categorias{param ? `: ${param}` : ''}</Text>
+
             <SelectCategorias
               categorias={categorias}
               setParam={setParam}

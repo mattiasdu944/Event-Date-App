@@ -5,7 +5,6 @@ import styled from 'styled-components'
 export const SelectCategorias = ({categorias, setParam, param}) => {
     return (
         <>
-            <Text textStyle='h3' mb={5}>Categorias{param ? `: ${param}` : ''}</Text>
             <Select 
                 placeholder='Categorias' 
                 color='white'

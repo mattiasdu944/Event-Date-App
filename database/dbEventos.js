@@ -30,3 +30,14 @@ export const getAllSlugEvents = async () => {
     const [slugs] = await db.query('SELECT slug from v_data_evento');
     return slugs;
 }
+
+
+export const getLocalizedEvent = async () => {
+    const [ciudades] = await db.query('select id, nombre from ciudad');
+    return ciudades;
+}
+
+export const getModalidadEvent = async () => {
+    const [modalidades] = await db.query('select * from modalidad_evento');
+    return modalidades;
+}

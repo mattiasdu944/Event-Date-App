@@ -28,6 +28,6 @@ export const nav_links = [
     },
     {
         name: 'Crear evento',
-        path: '#crear-evento',
+        path: '/eventos/new',
     },
 ]
