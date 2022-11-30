@@ -69,7 +69,7 @@ const EventoProvider = ({ children }) => {
 
         if( evento.titulo.trim() === '' || evento.descripcion.trim() === '' || evento.direccion.trim() === '' 
         || evento.categoria.trim() === '' || evento.modalidad.trim() === '' || evento.localizacion.trim() === ''
-        || evento.fecha_evento.trim() === '' || evento.hora_evento.trim() === '' || evento.imagen_evento.trim() === '') {
+        || evento.fecha_evento.trim() === '' || evento.hora_evento.trim() === '') {
             setFormError(true)
             return;
         }
